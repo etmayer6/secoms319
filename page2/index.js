@@ -12,7 +12,7 @@ function loadWeather(weather){
     var txtWeather = document.getElementById("text");
 
 
-let temperature = 24;//need to assign temperature to the input value of the raspberry pi
+let temperature = 21;//need to assign temperature to the input value of the raspberry pi
 let index;
 
 if(temperature < 0){
