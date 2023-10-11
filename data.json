@@ -1,0 +1,69 @@
+{
+    "food": [
+        {
+            "ID": "negative",
+            "title": "SUB-ZERO",
+            "image": "./negative.jpg"
+        },
+        {
+            "ID": "0-10",
+            "title": "Arctic",
+            "image": "./0-10.jpg"
+        },
+        {
+            "ID": "10-20",
+            "title": "Frigid",
+            "image": "./10-20.jpg"
+        },
+        {
+            "ID": "20-30",
+            "title": "Freezing",
+            "image": "./20-30.jpg"
+        },
+        {
+            "ID": "30-40",
+            "title": "Cold",
+            "image": "./30-40.jpg"
+        },
+        {
+            "ID": "40-50",
+            "title": "Chilly",
+            "image": "./40-50.jpg"
+        },
+        {
+            "ID": "50-60",
+            "title": "Cool",
+            "image": "./50-60.jpg"
+        },
+        {
+            "ID": "60-70",
+            "title": "Comfortable",
+            "image": "./60-70.jpg"
+        },
+        {
+            "ID": "70-80",
+            "title": "Warm",
+            "image": "./70-80.jpg"
+        },
+        {
+            "ID": "80-90",
+            "title": "Hot",
+            "image": "./80-90.jpg"
+        },
+        {
+            "ID": "90-100",
+            "title": "Sizzling",
+            "image": "./90-100.jpg"
+        },
+        {
+            "ID": "100-110",
+            "title": "Scorching",
+            "image": "./100-110.jpg"
+        },
+        {
+            "ID":"hell",
+            "title": "Hell",
+            "image": "./hell.jpg"
+        }
+    ]
+}

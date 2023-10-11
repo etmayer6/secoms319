@@ -3,67 +3,80 @@
         {
             "ID": "negative",
             "title": "SUB-ZERO",
-            "image": "./images/negative.jpg"
+            "image": "./images/negative.jpg",
+            "text": "You're in for a rough day today!"
         },
         {
             "ID": "0-10",
             "title": "Arctic",
-            "image": "./images/0-10.jpg"
+            "image": "./images/0-10.jpg",
+            "text": "Bundle up!"
         },
         {
             "ID": "10-20",
             "title": "Frigid",
-            "image": "./images/10-20.jpg"
+            "image": "./images/10-20.jpg",
+            "text": "Brrrrrr!"
         },
         {
             "ID": "20-30",
             "title": "Freezing",
-            "image": "./images/20-30.jpg"
+            "image": "./images/20-30.jpg",
+            "text": "Feels like Christmas!"
         },
         {
             "ID": "30-40",
             "title": "Cold",
-            "image": "./images/30-40.jpg"
+            "image": "./images/30-40.jpg",
+            "text": "Watch out for ice!"
         },
         {
             "ID": "40-50",
             "title": "Chilly",
-            "image": "./images/40-50.jpg"
+            "image": "./images/40-50.jpg",
+            "text": "Great weather for a hoodie!"
         },
         {
             "ID": "50-60",
             "title": "Cool",
-            "image": "./images/50-60.jpg"
+            "image": "./images/50-60.jpg",
+            "text": "Great for hiking!"
         },
         {
             "ID": "60-70",
             "title": "Comfortable",
-            "image": "./images/60-70.jpg"
+            "image": "./images/60-70.jpg",
+            "text": "Enjoy the comfortable day!"
         },
         {
             "ID": "70-80",
             "title": "Warm",
-            "image": "./images/70-80.jpg"
+            "image": "./images/70-80.jpg",
+            "text": "Enjoy some outdoor activities!"
         },
         {
             "ID": "80-90",
             "title": "Hot",
-            "image": "./images/80-90.jpg"
+            "image": "./images/80-90.jpg",
+            "text": "Get your swimsuit on!"
         },
         {
             "ID": "90-100",
             "title": "Sizzling",
-            "image": "./images/90-100.jpg"
+            "image": "./images/90-100.jpg",
+            "text": "You could cook an egg out here!"
         },
         {
             "ID": "100-110",
             "title": "Scorching",
-            "image": "./images/100-110.jpg"
+            "image": "./images/100-110.jpg",
+            "text": "Don't go outside!"
         },
         {
             "ID":"hell",
             "title": "Hell",
-            "image": "./images/hell.jpg"
+            "image": "./images/hell.jpg",
+            "text": "Pray."
         }
     ]
 }
