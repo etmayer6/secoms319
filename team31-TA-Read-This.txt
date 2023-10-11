@@ -1,0 +1,7 @@
+index.html in this folder is the first catalog, when you open it, it will be a local file, but all of these sites are online on my github
+
+just clicking the navigation in the header will take you to the online sites.
+
+Aldaco said that this is a fine way to do it
+
+Thanks, Ethan Mayer 
