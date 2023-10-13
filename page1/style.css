@@ -18,14 +18,14 @@ nav a{
 }
 h1{
     font-size:50px;
-    background-color:black;
+    background-color:cadetblue;
    
 }
 h3{
-    background-color:black;
+    background-color:cadetblue;
 }
 header{
-    background-color:#333;
+    background-color:cadetblue;
     color: #fff;
     padding: 10px 0;
 }
@@ -40,4 +40,14 @@ header{
     display:inline-block;
     padding: 10px;
    
+}
+.imagechanger{
+    
+    border-radius: 500px;
+    
+    
+    width: 380px;
+    height:380px; 
+    
+    object-position: center;
 }

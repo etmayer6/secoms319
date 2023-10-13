@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foodie Forecast!</title>
+    <link rel ="icon" href="https://cdn-icons-png.flaticon.com/512/6289/6289680.png">
     <link rel="stylesheet" href="style.css">
-    <script src = "index.js"></script>
+    <script src = ".index.js"></script>
 </head>
 <style>
     body{
         background-image: url('sun-images.jpg');
         background-size: 100%,100%;
+        
     }
 </style>
 <body>
@@ -18,7 +20,6 @@
     <header>
         <nav>
             <ul class="list-unstyled" style="text-align: center;">
-                
                 <li><a href="https://etmayer6.github.io/secoms319/fruitCatalog/" class="text-white">Fruits</a></li>
                 <li><a href="https://etmayer6.github.io/secoms319/developers" class="text-white">Developers</a></li>
             </ul>
@@ -30,15 +31,11 @@
         </div>
         
     </section>
-    <!-- <section>
-        <div class="center">
-            <h1 id="forecast" style = "text-align: center;"class="coolTitle">Weather Food-cast</h1>
-        </div>
-        
-    </section> -->
     <section>
         <div class="center">
-            <h3 id="forecast" class="coolTitle">The current temperature is: </h3>
+            <div id = "curTemp">
+                
+            </div>
         </div>
     </section>
     <section>
@@ -47,9 +44,15 @@
         </div>
     </section>
     <section>
-        <div id ="image">
-            
+        <div class="center">
+           
+            <div id ="image" >
+                <div id ="text">
+                    
+                </div>
+            </div>
         </div>
+        
     </section>
     
 </body>
