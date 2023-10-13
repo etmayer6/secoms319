@@ -55,6 +55,7 @@ footer{
     height:400px; 
     object-fit: cover;
     margin: auto;
+    border: 5px solid;
 }
 .coolfont{
     font-family:Georgia, Times, 'Times New Roman', serif ;
@@ -74,4 +75,18 @@ footer{
     margin: auto;
     width: 50%;
     padding: 10px;
+    border: 5px solid;
+
+}
+.center2{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+
+}
+.center3{
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+    border: 5px solid;
 }
