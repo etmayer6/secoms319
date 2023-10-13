@@ -91,7 +91,7 @@ let img = document.createElement("div");
 img.innerHTML = `<img src=${image} class="imagechanger"></img>`;
 
 let txt = document.createElement("p");
-txt.innerHTML = `<p class="coolfont"> <strong>${title}</strong>, ${text}</p>`;
+txt.innerHTML = `<p class="coolfont"> The climate outside feels: <strong>${title}</strong>, ${text}</p>`;
 
 tempWeather.appendChild(outside);
 imgWeather.appendChild(img);
