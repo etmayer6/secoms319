@@ -17,7 +17,13 @@ function findTemperature(weatherData){
     temperature = weatherData.days[0].temp;
     feelslike = weatherData.days[0].feelslike;
     precipprob = weatherData.days[0].precipprob;
-    preciptype = weatherData.days[0].preciptype[0];
+
+    if(precipprob == 0){
+        preciptype = "none";
+    }
+    else{
+        preciptype = weatherData.days[0].preciptype[0];
+    }
     windspeed = weatherData.days[0].windspeed;
     humidity = weatherData.days[0].humidity;
     //convert to farenheit
@@ -26,6 +32,16 @@ function findTemperature(weatherData){
     //convert to mph
     windspeed = Math.ceil(windspeed/1.609);
     
+
+    if(!temperature){
+        temperature = -1;
+        feelslike = -1;
+        precipprob = -1;
+        preciptype = "unknown";
+        windspeed = -1;
+        humidity = -1;
+    }
+
 
     fetch("data.json")
     .then(response => response.json())
