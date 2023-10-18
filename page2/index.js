@@ -31,7 +31,6 @@ function findTemperature(weatherData){
     feelslike = (feelslike * 9/5) + 32;
     //convert to mph
     windspeed = Math.ceil(windspeed/1.609);
-    temperature = Math.floor(temperature);
 
     if(!temperature){
         temperature = -1;
