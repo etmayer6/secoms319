@@ -39,7 +39,7 @@ function loadImages(images) {
     var curImg = document.getElementById("image");
     var curText = document.getElementById("text");
     var curTemp = document.getElementById("curTemp");
-
+    var curText2 = document.getElementById("text2");
 
     if (temp > 0 && temp <= 10) {
         setTemp= 0;
@@ -77,21 +77,22 @@ function loadImages(images) {
 
     let url = images.images[setTemp].url;
     let name = images.images[setTemp].name;
+    let desc = images.images[setTemp].desc;
 
-
-            let img = document.createElement("div");
-            let txt = document.createElement("p");
-            let tmp = document.createElement("h3");
-            //sets the image in the html to that url
-            img.innerHTML = `<img src=${url} class="imagechanger" alt="..."></img>`;
-            txt.innerHTML= `<p class=center> <strong>${name}</strong></p>`;
-            tmp.innerHTML=`<h3 id="forecast" class="coolTitle">The current temperature in Ames, Iowa is: ${temp} degrees</h3>`;
-        
-    
+    let img = document.createElement("div");
+    let txt = document.createElement("p");
+    let tmp = document.createElement("h3");
+    let txt2 = document.createElement("h3");
+    //sets the image in the html to that url
+    img.innerHTML = `<img src=${url} class="imagechanger" alt="..."></img>`;
+    txt.innerHTML= `<p id="forecast" class=center> <strong>${name}</strong></p>`;
+    tmp.innerHTML=`<h3 id="forecast" >The current temperature in Ames, Iowa is: ${temp} degrees</h3>`;
+    txt2.innerHTML=`<h3 id="forecast" >${desc}</h3>`;
 
     curImg.appendChild(img);
     curText.appendChild(txt);
     curTemp.appendChild(tmp);
+    curText2.appendChild(txt2);
 
 
 }

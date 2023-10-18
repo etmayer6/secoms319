@@ -17,7 +17,7 @@ nav a{
     color: #fff;
 }
 h1{
-    font-size:50px;
+    font-size:40px;
     background-color:cadetblue;
    
 }
@@ -33,8 +33,9 @@ header{
     text-align: center;
 }
 .coolTitle{
-    font-size: 500;
-    border-radius:10px;
+    
+    /* font-size: 400; */
+    border-radius:40px;
     font-family:Georgia, Times, 'Times New Roman', serif;
     color: white;
     display:inline-block;
@@ -44,8 +45,6 @@ header{
 .imagechanger{
     
     border-radius: 500px;
-    
-    
     width: 380px;
     height:380px; 
     
