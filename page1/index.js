@@ -13,6 +13,7 @@ function findTemperature(weatherData){
     temp = weatherData.days[0].temp;
     //convert to farenheit
     temp = (temp * 9/5) + 32;
+    temp = Math.floor(temp);
 
     console.log(temp);
     //if temp is null give error value
