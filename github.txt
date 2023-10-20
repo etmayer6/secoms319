@@ -1,0 +1,9 @@
+This website url will take you to a navigation page, which will link to the 3 pages for the midterm project.
+
+etmayer6.github.io/secoms319
+
+Sites that the navigation page links to:
+
+etmayer6.github.io/secoms319/page1
+etmayer6.github.io/secoms319/page2
+etmayer6.github.io/secoms319/studentInfo

@@ -18,12 +18,12 @@ function findTemperature(weatherData){
     feelslike = weatherData.days[0].feelslike;
     precipprob = weatherData.days[0].precipprob;
 
-    if(precipprob == 0){
-        preciptype = "none";
-    }
-    else{
-        preciptype = weatherData.days[0].preciptype[0];
-    }
+    // if(precipprob == 0){
+    //     preciptype = "none";
+    // }
+    // else{
+    //     preciptype = weatherData.days[0].preciptype[0];
+    // }
     windspeed = weatherData.days[0].windspeed;
     humidity = weatherData.days[0].humidity;
     //convert to farenheit
@@ -36,7 +36,7 @@ function findTemperature(weatherData){
     if(!temperature){
         temperature = -1;
         feelslike = -1;
-        precipprob = -1;
+        //precipprob = -1;
         preciptype = "unknown";
         windspeed = -1;
         humidity = -1;
@@ -127,7 +127,6 @@ let info = document.createElement("p");
 info.innerHTML = `<p class="coolfont"> Feels like: <strong>${feelslike}</strong><br>
                                     Humidity: <strong>${humidity}</strong>% <br>
                                     Probability of precipitation: <strong>${precipprob}</strong>% <br>
-                                    Type of precipitation: <strong>${preciptype}</strong> <br>
                                     Windspeed: <strong>${windspeed}</strong> MPH <br>
 
 </p>`
