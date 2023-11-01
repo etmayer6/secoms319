@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Shop from "./Shopping.js";
@@ -7,6 +8,13 @@ root.render(
   <React.StrictMode>
     <div>
       <Shop />
+
+    </div>
+    <div>
+      <button >Checkout</button>
+    </div>
+    <div>
+
     </div>
   </React.StrictMode>
 );
