@@ -27,7 +27,7 @@ const Shop = () => {
 
   const listItems = items.map((el) => (
     <div key={el.id}>
-      <img class="img-fluid" src={el.image} width={150} /> <br />
+      <img className="img-fluid" src={el.image} width={150} /> <br />
       {el.title} <br />
       {el.category} <br />
       {el.price} <br />
@@ -37,7 +37,7 @@ const Shop = () => {
   ));
   const cartItems = cart.map((el) => (
     <div key={el.id}>
-      <img class="img-fluid" src={el.image} width={30} />
+      <img className="img-fluid" src={el.image} width={30} />
       {el.title}${el.price}
     </div>
   ));
