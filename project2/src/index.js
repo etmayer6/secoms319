@@ -11,7 +11,6 @@ root.render(
       <Shop />
 
     </div>
-
-
   </React.StrictMode>
 );
+export default root

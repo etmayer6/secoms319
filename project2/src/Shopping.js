@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import items from "./selected_products.json";
 import ReactDOM from 'react-dom';
 
-
 const Button = ({ onClick, label }) => {
   return <button onClick={onClick}>{label}</button>;
 };
@@ -10,19 +9,34 @@ const Button = ({ onClick, label }) => {
 
 
 const Shop = () => {
+  
+  const [query, setQuery] = useState('');
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
-
+  const [ProductsCategory, setProductsCategory] = useState(items);
+  
+ 
   const returnToCatalog = () => {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <div>      
+        <input type="search" value={query} placeholder ="Search"onChange={handleChange} />
         <div>{listItems}</div>
         <Button onClick={CartView} label="View Cart" />
       </div>
     );
+    
   }
 
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+    console.log("Step 6 : in handleChange, Target Value :",e.target.value," Query Value :",query);
+    const results = items.filter(eachProduct => {
+    if (e.target.value === "") return ProductsCategory;
+    return eachProduct.title.toLowerCase().includes(e.target.value.toLowerCase())
+    });
+    setProductsCategory(results);
+    }
   const CartView = () => {
     const root = ReactDOM.createRoot(document.getElementById('root'));
       root.render(
@@ -30,7 +44,6 @@ const Shop = () => {
           <div>Items in Cart:</div>
           <div>{cartItems}</div>
           <div>Order total to pay: ${cartTotal}</div>
-
           <div><TestButton/></div>
 
           <Button onClick={returnToCatalog} label="Return"/>
@@ -38,6 +51,7 @@ const Shop = () => {
 
       );
   
+
   }
 
   const TestButton = () => {
@@ -59,9 +73,7 @@ const Shop = () => {
   
     return (
       <div>
-  
         <Button onClick={handleClick} label="Checkout" />
-  
       </div>
     );
   };
@@ -320,10 +332,6 @@ const Shop = () => {
     );
   }
 
-
-
-
-
   useEffect(() => {
     total();
   }, [cart]);
@@ -334,7 +342,7 @@ const Shop = () => {
     }
     setCartTotal(totalVal);
   };
-
+  
   const addToCart = (el) => {
     setCart([...cart, el]);
   };
@@ -347,7 +355,7 @@ const Shop = () => {
     let hmot = cart.filter((cartItem) => cartItem.id === id);
     return hmot.length;
     }
-  const listItems = items.map((el) => (
+  const listItems = ProductsCategory.map((el) => (
     // PRODUCT
     <div class="row border-top border-bottom" key={el.id}>
       <div class="row main align-items-center">
@@ -387,8 +395,8 @@ const Shop = () => {
   ));
   return (
     <div>
+      <input type="search" value={query} placeholder="Search for Items" onChange={handleChange} />
       <div>{listItems}</div>
-
       <Button onClick={CartView} label="View Cart" />
     </div>
   );
