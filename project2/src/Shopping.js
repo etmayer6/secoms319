@@ -17,6 +17,7 @@ const Shop = () => {
   
  
   const returnToCatalog = () => {
+
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <div>      
@@ -25,7 +26,7 @@ const Shop = () => {
         <Button onClick={CartView} label="View Cart" />
       </div>
     );
-    
+
   }
 
   const handleChange = (e) => {
