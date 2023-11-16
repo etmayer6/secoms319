@@ -366,7 +366,7 @@ const Shop = () => {
             <div className="col-2"></div>
           </div>
         </div>
-        {/* runJS(); */}
+        runJS();
       </body>
     );
   }
