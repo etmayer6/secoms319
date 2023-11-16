@@ -9,7 +9,6 @@ root.render(
   <React.StrictMode>
     <div>
       <Shop />
-
     </div>
   </React.StrictMode>
 );
