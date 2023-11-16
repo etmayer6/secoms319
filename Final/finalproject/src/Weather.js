@@ -10,14 +10,19 @@ const Button = ({ onClick, label }) => {
 
 function Recipe () {
 
+  const backFromRecipe = () => {
 
+      loadFirstPage();
+  };
 
   return (
     <div>
         <h3>Here is where we output the recipe!</h3>
         <div className="center">
           
-          <Button onClick={calculateForecast} label="Back" />
+          <Button onClick={
+            
+            backFromRecipe} label="Back" />
   
         </div>
     </div>
@@ -25,13 +30,15 @@ function Recipe () {
   );
 }
 
+const loadFirstPage = () => {
 
+  window.location.reload();
+
+
+};
 
 function Forecast (forecastData) {
 
-  const refreshPage = () => {
-    window.location.reload();
-  };
 
 
   const loadRecipe = () => {
@@ -91,7 +98,7 @@ function Forecast (forecastData) {
           <section>
             <div className="center">
           
-              <Button onClick={refreshPage} label="Back" />
+              <Button onClick={loadFirstPage} label="Back" />
       
             </div>
             <div className="center">
