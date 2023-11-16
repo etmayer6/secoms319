@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 import "./style.css";
 //import Forecast from "forecast.js";
 
+//  const header={
+//   background-color:"cadetblue",
+//   color: "#fff",
+//   padding: 10px 0;
+// }
 const Button = ({ onClick, label }) => {
   return <button onClick={onClick}>{label}</button>;
 };
@@ -298,10 +303,10 @@ const Weather = () => {
             </section>
           </section>
           <div className="center">
-            <input id="Food" name="food" type="checkbox" value="1" />
-            <input id="Drinks" name="drinks" type="checkbox" value="1"/>
-            <input id="Vegetarian" name="vegetarian" type="checkbox" value="1"/>
-            <input id="Lactose-Free" name="lactose-free" type="checkbox" value="1"/>
+          <label><input id="Food" name="food" type="checkbox" value="1" />Food</label>
+          <label><input id="Drinks" name="drinks" type="checkbox" value="1"/>Drinks</label>
+          <label><input id="Vegetarian" name="vegetarian" type="checkbox" value="1"/>Vegetarian</label>
+          <label><input id="Lactose-Free" name="lactose-free" type="checkbox" value="1" />Lactose-Free</label>
           </div>
           <div className="center">
             <Button
