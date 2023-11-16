@@ -1,6 +1,164 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import './style.css';
+//import Forecast from "forecast.js";
+
+const Button = ({ onClick, label }) => {
+  return <button onClick={onClick}>{label}</button>;
+};
+
+
+function Recipe () {
+
+
+
+  return (
+    <div>
+        <h3>Here is where we output the recipe!</h3>
+        <div className="center">
+          
+          <Button onClick={calculateForecast} label="Back" />
+  
+        </div>
+    </div>
+    
+  );
+}
+
+
+
+function Forecast (forecastData) {
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
+
+  const loadRecipe = () => {
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(
+      <div>
+        <Recipe/>
+      </div>
+  
+    );
+
+  };
+
+  return (
+
+    
+      <body className="Weather"
+      style={{
+        backgroundSize: "cover",
+        backgroundImage: `url(${require("./sun-images.jpg")})`,
+      }}>
+      <div>
+        <div>
+
+          <section>
+            <div className="center">
+              <h1
+                id="forecast"
+                style={{ textAlign: "center" }}
+                className="coolTitle"
+              >
+                Foodie Forecast!
+              </h1>
+            </div>
+          </section>
+          <section>
+            <div className="center">
+              <h3 id="curTemp" className="coolTitle" />
+            </div>
+            <div className="center">
+            
+            </div>
+          </section>
+          
+          <section>
+            <div className="center">
+              <h3 id="text" className="coolTitle">Based on your weather, and preferences we recommend you eat: </h3>
+            </div>
+            <div className="center"> 
+              <div id="image" ></div>
+            </div>
+            <div className="center">
+              <h3 id="text2" className="coolTitle"></h3>
+            </div>
+          </section>
+          <section>
+            <div className="center">
+          
+              <Button onClick={refreshPage} label="Back" />
+      
+            </div>
+            <div className="center">
+          
+             <Button onClick={loadRecipe} label="See Recipe" />
+        
+             </div>
+          </section>
+
+        </div>
+      </div>
+    </body>
+    
+
+  );
+}
+const calculateForecast = () => {
+
+  let selectElement = document.querySelector('#Food');
+  //console.log(document.querySelector('#Food'));
+  let food = selectElement.value;
+
+  selectElement = document.querySelector('#Drinks');
+  let drinks = selectElement.value;
+
+  selectElement = document.querySelector('#Vegetarian');
+  let vegetarian = selectElement.value;
+
+  selectElement = document.querySelector('#Lactose-Free');
+  let lactosefree = selectElement.value;
+
+
+  console.log("Food: " + food);
+  console.log("Drinks: " + drinks);
+  console.log("Vegetarian: " + vegetarian);
+  console.log("Lactose-Free: " + lactosefree);
+
+
+  //if(images.images[setTemp].food == food){use food and so forth}
+
+
+
+  let forecastData;
+
+  fetch("data.json")
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Fetched Data:", data);
+    forecastData = data;
+  });
+
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(
+    <div>
+      <Forecast data={forecastData}/>
+    </div>
+
+  );
+
+  fetch("data.json")
+  .then((response) => response.json())
+  .then((images) => loadImages(images));
+};
+
+
+
+
 var temp;
 var hasRun =false;
 const getTemp = () => {
@@ -25,16 +183,83 @@ const getTemp = () => {
       }
 
       //then run the loadImages function after getting temp, since we need temp first
-      fetch("data.json")
+      fetch("view.json")
         .then((response) => response.json())
-        .then((images) => loadImages(images));
+        .then((weather) => loadTemperature(weather));
     }
   }
   hasRun=true;
 };
 
+const loadTemperature = (weather) => {
+
+  
+  var tempWeather = document.getElementById("curTemp");
+  var imgWeather = document.getElementById("image");
+
+  //temperature = weatherData.days[0].temp;
+
+let index;
+
+console.log(temp);
+
+if(temp < 0){
+  index = 0;
+}
+else if(temp >= 0 && temp < 10){
+  index = 1;
+}
+else if(temp >= 10 && temp < 20){
+  index = 2;
+}
+else if(temp >= 20 && temp < 30){
+  index = 3;
+}
+else if(temp >= 30 && temp < 40){
+  index = 4;
+}
+else if(temp >= 40 && temp < 50){
+  index = 5;
+}
+else if(temp >= 50 && temp < 60){
+  index = 6;
+}
+else if(temp >= 60 && temp < 70){
+  index = 7;
+}
+else if(temp >= 70 && temp < 80){
+  index = 8;
+}
+else if(temp >= 80 && temp < 90){
+  index = 9;
+}
+else if(temp >= 90 && temp < 100){
+  index = 10;
+}
+else if(temp >= 100 && temp < 110){
+  index = 11;
+}
+else{
+  index = 12;
+}
+
+let image = weather.weather[index].image;
+
+let outside = document.createElement("p");
+outside.innerHTML = `<p class="coolfont"> Current temperature in Ames: <strong>${temp}</strong> <br><br> 
+Based off the temperature outside, your view may look something like this: </p>`;
+
+let img = document.createElement("div");
+img.innerHTML = `<img src=${image} class="imagechanger"></img>`;
+
+
+tempWeather.appendChild(outside);
+imgWeather.appendChild(img);
+
+}
+
 var setTemp = 0;   
-function loadImages(images) {
+const loadImages = (images) => {
   
   var curImg = document.getElementById("image");
   var curText = document.getElementById("text");
@@ -84,20 +309,16 @@ function loadImages(images) {
   curTemp.appendChild(tmp);
   curText2.appendChild(txt2);
 }
+
 const Weather = () => {
   return (
-    <body>
-      <div
-        className="Weather"
-        style={{
-          backgroundSize: "cover",
-          backgroundImage: `url(${require("./sun-images.jpg")})`,
-        }}
-      >
+    <body className="Weather"
+    style={{
+      backgroundSize: "cover",
+      backgroundImage: `url(${require("./sun-images.jpg")})`,
+    }}>
+      <div>
         <div>
-          <header style={{ borderRadius: "40px" }}>
-            <nav></nav>
-          </header>
           <section>
             <div className="center">
               <h1
@@ -119,19 +340,39 @@ const Weather = () => {
             <div>
             {getTemp()}
           </div>
-          </section>
-          
           <section>
-            <div className="center">
-              <h3 id="text" className="coolTitle"></h3>
-            </div>
-            <div className="center">
-              <div id="image"></div>
-            </div>
-            <div className="center">
-              <h3 id="text2" className="coolTitle"></h3>
-            </div>
+
+            <div id="image" className ="center"></div>
           </section>
+          </section>
+          <div className="center">
+            <select id="Food" className="center">
+                <option value="unselected">Food</option>
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+
+            <select id="Drinks" className="center">
+                <option value="unselected">Drinks</option>
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+
+            <select id="Vegetarian" className="center">
+                <option value="unselected">Vegetarian</option>
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+
+            <select id="Lactose-Free" className="center">
+                <option value="unselected">Lactose-Free</option>
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+          </div>
+          <div className="center">
+            <Button onClick={calculateForecast} label="Calculate my Foodie Forecast!" />
+          </div>
         </div>
       </div>
     </body>

@@ -44,7 +44,7 @@ header{
 }
 .imagechanger{
     
-    border: black 5px solid;
+    border-radius: 500px;
     width: 380px;
     height:380px; 
     
