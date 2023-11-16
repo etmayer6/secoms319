@@ -26,7 +26,8 @@ const Shop = () => {
         <Button onClick={CartView} label="View Cart" />
       </div>
     );
-  };
+
+  }
 
   const handleChange = (e) => {
     setQuery(e.target.value);
