@@ -9,7 +9,7 @@ import "./style.css";
 //   padding: 10px 0;
 // }
 const Button = ({ onClick, label }) => {
-  return <button onClick={onClick}>{label}</button>;
+  return <button className="coolTitle" onClick={onClick}>{label}</button>;
 };
 
 
@@ -289,13 +289,19 @@ const loadImages = (images) => {
   curText2.appendChild(txt2);
 };
 
+
+// style={{
+//   backgroundSize: "cover",
+//   backgroundImage: `url(https://i.guim.co.uk/img/media/8d904ba5091c05f48cd173406dfa974244e27732/93_193_4090_2454/master/4090.jpg?width=620&dpr=2&s=none)`
+// }}
+
 const Weather = () => {
   return (
     <body
       className="Weather"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url(${require("./sun-images.jpg")})`,
+        backgroundImage: `url(https://t4.ftcdn.net/jpg/04/61/23/23/360_F_461232389_XCYvca9n9P437nm3FrCsEIapG4SrhufP.jpg)`,
       }}
     >
       <div>
@@ -305,7 +311,7 @@ const Weather = () => {
               <h1
                 id="forecast"
                 style={{ textAlign: "center" }}
-                className="coolTitle"
+                className="coolTitle2"
               >
                 Foodie Forecast!
               </h1>
@@ -313,7 +319,9 @@ const Weather = () => {
           </section>
           <section>
             <div className="center">
-              <h3 id="curTemp" className="coolTitle" />
+              <h3 id="curTemp" className="coolTitle2" 
+              
+              />
             </div>
             <div className="center"></div>
             <div>{getTemp()}</div>
@@ -322,10 +330,12 @@ const Weather = () => {
             </section>
           </section>
           <div className="center">
-          <label><input id="Food" name="food" type="checkbox" value="1" />Food</label>
-          <label><input id="Drinks" name="drinks" type="checkbox" value="1"/>Drinks</label>
-          <label><input id="Vegetarian" name="vegetarian" type="checkbox" value="1"/>Vegetarian</label>
-          <label><input id="Lactose-Free" name="lactose-free" type="checkbox" value="1" />Lactose-Free</label>
+            <div className="center">
+            <label className="coolTitle"><input className="coolTitle" id="Food" name="food" type="checkbox" value="1" />Food</label>
+            <label className="coolTitle"><input className="coolTitle" id="Drinks" name="drinks" type="checkbox" value="1"/>Drinks</label>
+            <label className="coolTitle"><input className="coolTitle" id="Vegetarian" name="vegetarian" type="checkbox" value="1"/>Vegetarian</label>
+            <label className="coolTitle"><input className="coolTitle" id="Lactose-Free" name="lactose-free" type="checkbox" value="1" />Lactose-Free</label>
+            </div>
           </div>
           <div className="center">
             <Button
