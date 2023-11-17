@@ -83,6 +83,7 @@ function Forecast (forecastData) {
           </section>
 
           <section>
+             
             <div className="center">
               <h3 id="text" className="coolTitle">
                 Based on your weather, and preferences we recommend you eat:{" "}
@@ -97,12 +98,12 @@ function Forecast (forecastData) {
           </section>
           <section>
             <div className="center">
+              <Button onClick={loadRecipe} label="See Recipe" />
+            </div>
+            <div className="center">
           
               <Button onClick={loadFirstPage} label="Back" />
       
-            </div>
-            <div className="center">
-              <Button onClick={loadRecipe} label="See Recipe" />
             </div>
           </section>
         </div>
