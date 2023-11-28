@@ -53,19 +53,178 @@ function Recipe() {
     loadFirstPage();
   };
 
+
+
+
   return (
-    <div>
-      <h3>Here is where we output the recipe!</h3>
+    <body
+      className="Recipe"
+      style={{
+        backgroundSize: "cover",
+        backgroundImage: `url("https://t4.ftcdn.net/jpg/05/52/88/59/360_F_552885945_3mKs02TFNxZS8ztXp2wYpPWDyjA57fXx.jpg")`,
+      }}>
       <div className="center">
-        <Button onClick={backFromRecipe} label="Back" />
+        <h3 id="recipe" className="coolTitle3"></h3>
+
+        <div className="center">
+          <Button onClick={backFromRecipe} label="Back" />
+        </div>
       </div>
-    </div>
+    </body>
   );
 }
 
 const loadFirstPage = () => {
   window.location.reload();
 };
+
+function POST() {
+
+  const postNewFood = () => {
+    
+  }
+
+  return (
+    <body
+      className="Weather"
+      style={{
+        backgroundSize: "cover",
+        backgroundImage: `url(${require("./sun-images.jpg")})`,
+      }}>
+      <div>
+        <section>
+          <div className="center">
+            <h1
+              id="forecast"
+              style={{ textAlign: "center" }}
+              className="coolTitle"
+            >
+              Foodie Forecast!
+            </h1>
+          </div>
+        </section>
+        <section>
+          <div>
+            <h3 className="coolTitle3">We were unable to calculate a food item that matches your search queries. Please try adding your own!</h3>
+          </div>
+        </section>
+        <div className="center">
+          <label className="coolTitle3">
+            Name of food:
+            <input
+              className="coolTitle"
+              type="text"
+              id="Name"
+              name="name"
+              value=""
+            />
+
+          </label>
+          <label className="coolTitle3">
+            Image URL:
+            <input
+              className="coolTitle"
+              type="url"
+              id="Url"
+              name="url"
+              value=""
+            />
+
+          </label>
+          <label className="coolTitle3">
+            Description:
+            <input
+              className="coolTitle"
+              type="text"
+              id="Desc"
+              name="desc"
+              value=""
+            />
+
+          </label>
+          <label className="coolTitle3">
+            Recipe:
+            <input
+              className="coolTitle"
+              type="text"
+              id="Recipe"
+              name="recipe"
+              value=""
+            />
+
+          </label>
+        </div>
+        <div className="center">
+          <label className="coolTitle3">
+            Temperature:
+            <select className="coolTitle">
+              <option>0-10</option>
+              <option>10-20</option>
+              <option>20-30</option>
+              <option>30-40</option>
+              <option>40-50</option>
+              <option>50-60</option>
+              <option>60-70</option>
+              <option>70-80</option>
+              <option>80-90</option>
+              <option>90-100</option>
+              <option>100-110</option>
+
+            </select>
+          </label>
+        </div>
+        <div className="center">
+          <label className="coolTitle">
+            <input
+              className="coolTitle"
+              id="Food"
+              name="food"
+              type="checkbox"
+              value=""
+            />
+            Is Food?
+          </label>
+          <label className="coolTitle">
+            <input
+              className="coolTitle"
+              id="Drinks"
+              name="drinks"
+              type="checkbox"
+              value=""
+            />
+
+            Is Drink?
+          </label>
+          <label className="coolTitle">
+            <input
+              className="coolTitle"
+              id="Vegetarian"
+              name="vegetarian"
+              type="checkbox"
+              value=""
+            />
+            Is Vegetarian?
+          </label>
+          <label className="coolTitle">
+            <input
+              className="coolTitle"
+              id="Lactose-Free"
+              name="lactose-free"
+              type="checkbox"
+              value=""
+            />
+            Is Lactose-Free?
+          </label>
+        </div>
+        <div className="center">
+          <Button onClick={postNewFood} label = "Post"></Button>
+        </div>
+      </div>
+
+
+    </body>
+  );
+}
 
 function Forecast() {
   const loadRecipe = () => {
@@ -75,9 +234,27 @@ function Forecast() {
         <Recipe />
       </div>
     );
+
+    const appendRecipe = () => {
+      console.log(finalFilteredArray[0].recipe);
+
+      let recipe = finalFilteredArray[0].recipe;
+
+      let recipeID = document.getElementById("recipe");
+
+      let recipeHTML = document.createElement("p")
+
+      recipeHTML.innerHTML = `<p className="center">${recipe}</p>`;
+
+      recipeID.appendChild(recipeHTML);
+    }
+
+    setTimeout(() => {
+      appendRecipe();
+    }, 200);
   };
 
-  
+
 
 
   return (
@@ -134,12 +311,9 @@ function Forecast() {
               <Button onClick={loadFirstPage} label="Back" />
 
             </div>
-            <div className="center">
-              <Button onClick={loadImages} label="Load Images" />
-            </div>
           </section>
         </div>
-        
+
       </div>
     </body>
   );
@@ -149,7 +323,7 @@ var finalFilteredArray = [];
 const calculateForecast = (a, b, c, d) => {
 
 
-  const filterJSON = (a,b,c,d) => {
+  const filterJSON = (a, b, c, d) => {
 
     console.log(a, b, c, d);
     //THIS SETS FILTERED DATA TO THE OBJECT(IF ANY) THAT FITS THE SELECTIONS
@@ -261,27 +435,50 @@ const calculateForecast = (a, b, c, d) => {
 
 
       });
-     
+
   };
 
-  filterJSON(a,b,c,d);
+  filterJSON(a, b, c, d);
 
+  setTimeout(() => {
+
+    if (finalFilteredArray.length) {
+
+      const renderForecast = () => {
         const root = ReactDOM.createRoot(document.getElementById("root"));
         root.render(
           <div>
             <div>
-              <Forecast/>
+              <Forecast />
             </div>
 
           </div>
         );
 
-        // console.log("rendered");
+      }
 
-      
+      renderForecast();
 
-      //loadImages();
-  }
+
+      // console.log("rendered");
+
+      setTimeout(() => {
+        loadImages();
+      }, 200);
+    }
+    else {
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(
+        <div>
+          <div>
+            <POST />
+          </div>
+
+        </div>
+      );
+    }
+  }, 200);
+}
 
 
 
@@ -415,7 +612,7 @@ const loadImages = () => {
   console.log(curTemp);
   console.log(curText2);
 
-console.log(images[0].url);
+  console.log(images[0].url);
   let url = images[setTemp].url;
   let name = images[setTemp].name;
   let desc = images[setTemp].desc;

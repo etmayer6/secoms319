@@ -60,6 +60,17 @@ header{
     margin: 2px;
    
 }
+.coolTitle3{
+    border-radius:40px;
+    font-family:Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    display:inline-block;
+    padding: 10px;
+    text-align: center;
+    border: black 2px solid;
+    background-color:lightgray;
+    margin: 100px;
+}
 .imagechanger{
     
     border: black 5px solid;
