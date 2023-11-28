@@ -67,7 +67,7 @@ const loadFirstPage = () => {
   window.location.reload();
 };
 
-function Forecast(a, b, c, d) {
+function Forecast() {
   const loadRecipe = () => {
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(
@@ -77,7 +77,79 @@ function Forecast(a, b, c, d) {
     );
   };
 
-  const filterJSON = () => {
+  
+
+
+  return (
+    <body
+      className="Weather"
+      style={{
+        backgroundSize: "cover",
+        backgroundImage: `url(${require("./sun-images.jpg")})`,
+      }}
+    >
+      <div>
+        <div>
+          <section>
+            <div className="center">
+              <h1
+                id="forecast"
+                style={{ textAlign: "center" }}
+                className="coolTitle"
+              >
+                Foodie Forecast!
+              </h1>
+            </div>
+          </section>
+          <section>
+            <div className="center">
+              <h3 id="temperature" className="coolTitle" />
+            </div>
+          </section>
+
+          <section>
+
+            <div className="center">
+              <h3 id="text" className="coolTitle">
+                Based on your weather, and preferences we recommend you eat:{" "}
+              </h3>
+            </div>
+          </section>
+          <section>
+            <div className="center">
+              <div id="img"></div>
+            </div>
+          </section>
+          <section>
+            <div className="center">
+              <h3 id="text2" className="coolTitle"></h3>
+            </div>
+          </section>
+          <section>
+            <div className="center">
+              <Button onClick={loadRecipe} label="See Recipe" />
+            </div>
+            <div className="center">
+
+              <Button onClick={loadFirstPage} label="Back" />
+
+            </div>
+            <div className="center">
+              <Button onClick={loadImages} label="Load Images" />
+            </div>
+          </section>
+        </div>
+        
+      </div>
+    </body>
+  );
+}
+var finalFilteredArray = [];
+
+const calculateForecast = (a, b, c, d) => {
+
+
+  const filterJSON = (a,b,c,d) => {
 
     console.log(a, b, c, d);
     //THIS SETS FILTERED DATA TO THE OBJECT(IF ANY) THAT FITS THE SELECTIONS
@@ -192,77 +264,7 @@ function Forecast(a, b, c, d) {
      
   };
 
-
-  return (
-    <body
-      className="Weather"
-      style={{
-        backgroundSize: "cover",
-        backgroundImage: `url(${require("./sun-images.jpg")})`,
-      }}
-    >
-      <div>
-        <div>
-          <section>
-            <div className="center">
-              <h1
-                id="forecast"
-                style={{ textAlign: "center" }}
-                className="coolTitle"
-              >
-                Foodie Forecast!
-              </h1>
-            </div>
-          </section>
-          <section>
-            <div className="center">
-              <h3 id="temperature" className="coolTitle" />
-            </div>
-          </section>
-
-          <section>
-
-            <div className="center">
-              <h3 id="text" className="coolTitle">
-                Based on your weather, and preferences we recommend you eat:{" "}
-              </h3>
-            </div>
-          </section>
-          <section>
-            <div className="center">
-              <div id="img"></div>
-            </div>
-          </section>
-          <section>
-            <div className="center">
-              <h3 id="text2" className="coolTitle"></h3>
-            </div>
-          </section>
-          <section>
-            <div className="center">
-              <Button onClick={loadRecipe} label="See Recipe" />
-            </div>
-            <div className="center">
-
-              <Button onClick={loadFirstPage} label="Back" />
-
-            </div>
-
-          </section>
-        </div>
-        <div>{filterJSON()}</div>
-      </div>
-    </body>
-  );
-}
-var finalFilteredArray = [];
-
-const calculateForecast = (a, b, c, d) => {
-
-var a = a;
-var b = b;
-var c = c;
-var d = d;
+  filterJSON(a,b,c,d);
 
         const root = ReactDOM.createRoot(document.getElementById("root"));
         root.render(
@@ -276,10 +278,9 @@ var d = d;
 
         // console.log("rendered");
 
-
       
 
-      loadImages();
+      //loadImages();
   }
 
 
