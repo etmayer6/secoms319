@@ -67,7 +67,7 @@ const loadFirstPage = () => {
   window.location.reload();
 };
 
-function Forecast(forecastData) {
+function Forecast(a, b, c, d) {
   const loadRecipe = () => {
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(
@@ -76,6 +76,122 @@ function Forecast(forecastData) {
       </div>
     );
   };
+
+  const filterJSON = () => {
+
+    console.log(a, b, c, d);
+    //THIS SETS FILTERED DATA TO THE OBJECT(IF ANY) THAT FITS THE SELECTIONS
+    fetch("data.json")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        jsondata = data.images
+
+        const temperatureFilteredArray = [];
+
+        jsondata.forEach(element => {
+
+          if (element.id == tempForFilter) {
+            temperatureFilteredArray.push(element);
+          }
+        });
+
+        console.log("Temperature filter");
+        console.log(temperatureFilteredArray);
+
+        const foodFilteredArray = [];
+
+        if (a) {
+          temperatureFilteredArray.forEach(element => {
+
+            if (element.food == "true") {
+              foodFilteredArray.push(element);
+            }
+          });
+        }
+        else {
+          temperatureFilteredArray.forEach(element => {
+
+            if (element.food == "false") {
+              foodFilteredArray.push(element);
+            }
+          });
+        }
+        console.log("Food filter");
+        console.log(foodFilteredArray);
+
+
+        const drinkFilteredArray = [];
+
+        if (b) {
+          foodFilteredArray.forEach(element => {
+
+            if (element.drink == "true") {
+              drinkFilteredArray.push(element);
+            }
+          });
+        }
+        else {
+          foodFilteredArray.forEach(element => {
+
+            if (element.drink == "false") {
+              drinkFilteredArray.push(element);
+            }
+          });
+        }
+        console.log("Drink filter");
+        console.log(drinkFilteredArray);
+
+
+        const vegetarianFilteredArray = [];
+
+        if (c) {
+          drinkFilteredArray.forEach(element => {
+
+            if (element.vegetarian == "true") {
+              vegetarianFilteredArray.push(element);
+            }
+          });
+        }
+        else {
+          drinkFilteredArray.forEach(element => {
+
+            if (element.vegetarian == "false") {
+              vegetarianFilteredArray.push(element);
+            }
+          });
+        }
+        console.log("Vegetarian filter");
+        console.log(vegetarianFilteredArray);
+
+
+
+        if (d) {
+          vegetarianFilteredArray.forEach(element => {
+
+            if (element.dairy == "true") {
+              finalFilteredArray.push(element);
+            }
+          });
+        }
+        else {
+          vegetarianFilteredArray.forEach(element => {
+
+            if (element.dairy == "false") {
+              finalFilteredArray.push(element);
+            }
+          });
+        }
+        console.log("Lactose filter");
+        console.log(finalFilteredArray);
+
+        // console.log("rendered");
+
+
+      });
+     
+  };
+
 
   return (
     <body
@@ -100,21 +216,24 @@ function Forecast(forecastData) {
           </section>
           <section>
             <div className="center">
-              <h3 id="curTemp" className="coolTitle" />
+              <h3 id="temperature" className="coolTitle" />
             </div>
-            <div className="center"></div>
           </section>
 
           <section>
-             
+
             <div className="center">
               <h3 id="text" className="coolTitle">
                 Based on your weather, and preferences we recommend you eat:{" "}
               </h3>
             </div>
+          </section>
+          <section>
             <div className="center">
-              <div id="image"></div>
+              <div id="img"></div>
             </div>
+          </section>
+          <section>
             <div className="center">
               <h3 id="text2" className="coolTitle"></h3>
             </div>
@@ -124,79 +243,46 @@ function Forecast(forecastData) {
               <Button onClick={loadRecipe} label="See Recipe" />
             </div>
             <div className="center">
-          
+
               <Button onClick={loadFirstPage} label="Back" />
-      
+
             </div>
+
           </section>
         </div>
+        <div>{filterJSON()}</div>
       </div>
     </body>
   );
 }
-const calculateForecast = (a,b,c,d) => {
-  console.log(a,b,c,d);
-  let filteredData;
-  //THIS SETS FILTERED DATA TO THE OBJECT(IF ANY) THAT FITS THE SELECTIONS
-  fetch("data.json")
-  .then((response)=>response.json())
-  .then((data) => {
-    console.log(data);
-    jsondata=data.images
-    //FILTERS BY TEMP
-    filteredData = jsondata.filter(element => element.id == "50-60") ?? [];
-    // jsondata = JSON.parse(data);
-    console.log("First Check");
-    console.log(filteredData);
-  let selectElement = document.getElementById("Food");
-  console.log("Select Element = " +selectElement);
-  console.log("bi");
-  console.log(document.getElementById("Food"));
-  if (a) {
-    console.log("be");
-    filteredData = filteredData.filter(element => element.food == a) ?? [];
-    console.log("Food is checked");
-  }
-  console.log("bo");
-  selectElement = document.getElementById("Drinks");
-  // let drinks = selectElement.value;
-  if (b) {
-    filteredData = filteredData.filter(element => element.drink == b) ?? [];
-    console.log("Drinks are checked");
-  }
-  selectElement = document.getElementById("Vegetarian");
-  // let vegetarian = selectElement.value;
-  if (c) {
-    filteredData = filteredData.filter(element => element.vegetarian == c) ?? [];
-    console.log("Vegetarian is checked");
-  }
-  selectElement = document.getElementById("Lactose-Free");
-  // let lactosefree = selectElement.value;
-  if (d) {
-    filteredData = filteredData.filter(element => element.dairy == d) ?? [];
-    console.log("Lactose-Free is checked");
-  }
-  console.log("Hi"+filteredData);
-  });
-  let forecastData;
-  fetch("data.json")
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Fetched Data:", data);
-      forecastData = data;
-    });
+var finalFilteredArray = [];
 
-  const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(
-    <div>
-      <Forecast data={forecastData} />
-    </div>
-  );
+const calculateForecast = (a, b, c, d) => {
 
-  fetch("data.json")
-    .then((response) => response.json())
-    .then((images) => loadImages(images));
-};
+var a = a;
+var b = b;
+var c = c;
+var d = d;
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(
+          <div>
+            <div>
+              <Forecast/>
+            </div>
+
+          </div>
+        );
+
+        // console.log("rendered");
+
+
+      
+
+      loadImages();
+  }
+
+
 
 
 
@@ -244,37 +330,37 @@ const loadTemperature = (weather) => {
   if (temp < 0) {
     index = 0;
   } else if (temp >= 0 && temp < 10) {
-    tempForFilter="0-10"
+    tempForFilter = "0-10"
     index = 1;
   } else if (temp >= 10 && temp < 20) {
-    tempForFilter="10-20"
+    tempForFilter = "10-20"
     index = 2;
   } else if (temp >= 20 && temp < 30) {
-    tempForFilter="20-30"
+    tempForFilter = "20-30"
     index = 3;
   } else if (temp >= 30 && temp < 40) {
-    tempForFilter="30-40"
+    tempForFilter = "30-40"
     index = 4;
   } else if (temp >= 40 && temp < 50) {
-    tempForFilter="40-50"
+    tempForFilter = "40-50"
     index = 5;
   } else if (temp >= 50 && temp < 60) {
-    tempForFilter="50-60"
+    tempForFilter = "50-60"
     index = 6;
   } else if (temp >= 60 && temp < 70) {
-    tempForFilter="60-70"
+    tempForFilter = "60-70"
     index = 7;
   } else if (temp >= 70 && temp < 80) {
-    tempForFilter="70-80"
+    tempForFilter = "70-80"
     index = 8;
   } else if (temp >= 80 && temp < 90) {
-    tempForFilter="80-90"
+    tempForFilter = "80-90"
     index = 9;
   } else if (temp >= 90 && temp < 100) {
-    tempForFilter="90-100"
+    tempForFilter = "90-100"
     index = 10;
   } else if (temp >= 100 && temp < 110) {
-    tempForFilter="100-110"
+    tempForFilter = "100-110"
     index = 11;
   } else {
     index = 12;
@@ -299,39 +385,39 @@ let jsondata;
 
 
 var setTemp = 0;
-const loadImages = (images) => {
-  var curImg = document.getElementById("image");
+const loadImages = () => {
+
+
+  //we need to rewrite this entire method!
+
+
+
+
+
+
+
+
+
+
+  var images = finalFilteredArray;
+
+
+  console.log(images);
+
+  var curImg = document.getElementById("img");
   var curText = document.getElementById("text");
-  var curTemp = document.getElementById("curTemp");
+  var curTemp = document.getElementById("temperature");
   var curText2 = document.getElementById("text2");
 
-  if (temp > 0 && temp <= 10) {
-    setTemp = 0;
-  } else if (temp > 10 && temp <= 20) {
-    setTemp = 1;
-  } else if (temp > 20 && temp <= 30) {
-    setTemp = 2;
-  } else if (temp > 30 && temp <= 40) {
-    setTemp = 3;
-  } else if (temp > 40 && temp <= 50) {
-    setTemp = 4;
-  } else if (temp > 50 && temp <= 60) {
-    setTemp = 5;
-  } else if (temp > 60 && temp <= 70) {
-    setTemp = 6;
-  } else if (temp > 70 && temp <= 80) {
-    setTemp = 7;
-  } else if (temp > 80 && temp <= 90) {
-    setTemp = 8;
-  } else if (temp > 90 && temp <= 100) {
-    setTemp = 9;
-  } else if (temp > 100 && temp <= 110) {
-    setTemp = 10;
-  }
-  
-  let url = images.images[setTemp].url;
-  let name = images.images[setTemp].name;
-  let desc = images.images[setTemp].desc;
+  console.log(curImg);
+  console.log(curText);
+  console.log(curTemp);
+  console.log(curText2);
+
+console.log(images[0].url);
+  let url = images[setTemp].url;
+  let name = images[setTemp].name;
+  let desc = images[setTemp].desc;
 
   let img = document.createElement("div");
   let txt = document.createElement("p");
@@ -347,7 +433,7 @@ const loadImages = (images) => {
   curText.appendChild(txt);
   curTemp.appendChild(tmp);
   curText2.appendChild(txt2);
-  
+
 };
 
 // style={{
@@ -355,19 +441,19 @@ const loadImages = (images) => {
 //   backgroundImage: `url(https://i.guim.co.uk/img/media/8d904ba5091c05f48cd173406dfa974244e27732/93_193_4090_2454/master/4090.jpg?width=620&dpr=2&s=none)`
 // }}
 
-let HandleChange = (a,b) =>{
-  if(!a){
+let HandleChange = (a, b) => {
+  if (!a) {
     return true;
   }
-  else{
+  else {
     return false;
   }
 }
 const Weather = () => {
-  let [FoodCheck, setFoodCheck]=useState(false);
-  let [DrinkCheck, setDrinkCheck]=useState(false);
-  let [VegetarianCheck, setVegetarianCheck]=useState(false);
-  let [DairyCheck, setDairyCheck]=useState(false);
+  let [FoodCheck, setFoodCheck] = useState(false);
+  let [DrinkCheck, setDrinkCheck] = useState(false);
+  let [VegetarianCheck, setVegetarianCheck] = useState(false);
+  let [DairyCheck, setDairyCheck] = useState(false);
   return (
     <body
       className="Weather"
@@ -407,8 +493,8 @@ const Weather = () => {
                   id="Food"
                   name="food"
                   type="checkbox"
-                  value={FoodCheck} onChange={e=>FoodCheck=HandleChange(FoodCheck,true)}
-                  />
+                  value={FoodCheck} onChange={e => FoodCheck = HandleChange(FoodCheck, true)}
+                />
                 Food
               </label>
               <label className="coolTitle">
@@ -417,9 +503,9 @@ const Weather = () => {
                   id="Drinks"
                   name="drinks"
                   type="checkbox"
-                  value={DrinkCheck} onChange={e=>DrinkCheck=HandleChange(DrinkCheck,true)}
-                  />
-              
+                  value={DrinkCheck} onChange={e => DrinkCheck = HandleChange(DrinkCheck, true)}
+                />
+
                 Drinks
               </label>
               <label className="coolTitle">
@@ -428,8 +514,8 @@ const Weather = () => {
                   id="Vegetarian"
                   name="vegetarian"
                   type="checkbox"
-                  value={VegetarianCheck} onChange={e=>VegetarianCheck=HandleChange(VegetarianCheck,true)}
-                  />
+                  value={VegetarianCheck} onChange={e => VegetarianCheck = HandleChange(VegetarianCheck, true)}
+                />
                 Vegetarian
               </label>
               <label className="coolTitle">
@@ -438,15 +524,15 @@ const Weather = () => {
                   id="Lactose-Free"
                   name="lactose-free"
                   type="checkbox"
-                  value={DairyCheck} onChange={e=>DairyCheck=HandleChange(DairyCheck,true)}
-                  />
+                  value={DairyCheck} onChange={e => DairyCheck = HandleChange(DairyCheck, true)}
+                />
                 Lactose-Free
               </label>
             </div>
           </div>
           <div className="center">
             <Button
-              onClick={()=>calculateForecast(FoodCheck,DrinkCheck,VegetarianCheck,DairyCheck)}
+              onClick={() => calculateForecast(FoodCheck, DrinkCheck, VegetarianCheck, DairyCheck)}
               label="Calculate my Foodie Forecast!"
             />
           </div>
