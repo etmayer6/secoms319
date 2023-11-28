@@ -1,50 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./style.css";
-//import Forecast from "forecast.js";
+// var express = import("express");
+// var cors = import("cors");
+// var app = express();
+// var fs = import("fs");
+// var bodyParser = impo("body-parser");
+// app.use(cors());
+// app.use(bodyParser.json());
+// const port = "8081";
+// const host = "localhost";
 
+// app.listen(port, () => {
+//   console.log("App listening at http://%s:%s", host, port);
+// });
+// const { MongoClient } = require("mongodb");
+// const url = "mongodb://127.0.0.1:27017";
+// const dbName = "finalproject";
+// const client = new MongoClient(url);
+// const db = client.db(dbName);
+
+// app.get("/listRobots", async (req, res) => {
+//   await client.connect();
+//   console.log("Node connected successfully to GET MongoDB");
+//   const query = {};
+//   const results = await db
+//     .collection("robots")
+//     .find(query)
+//     .limit(100)
+//     .toArray();
+//   console.log(results);
+//   res.status(200);
+//   res.send(results);
+// });
 //  const header={
 //   background-color:"cadetblue",
 //   color: "#fff",
 //   padding: 10px 0;
 // }
+
+
 const Button = ({ onClick, label }) => {
-  return <button className="coolTitle" onClick={onClick}>{label}</button>;
+  return (
+    <button className="coolTitle" onClick={onClick}>
+      {label}
+    </button>
+  );
 };
 
-
-function Recipe () {
-
+function Recipe() {
   const backFromRecipe = () => {
-
-      loadFirstPage();
+    loadFirstPage();
   };
 
   return (
     <div>
-        <h3>Here is where we output the recipe!</h3>
-        <div className="center">
-          
-          <Button onClick={
-            
-            backFromRecipe} label="Back" />
-  
-        </div>
+      <h3>Here is where we output the recipe!</h3>
+      <div className="center">
+        <Button onClick={backFromRecipe} label="Back" />
+      </div>
     </div>
   );
 }
 
 const loadFirstPage = () => {
-
   window.location.reload();
-
-
 };
 
-function Forecast (forecastData) {
-
-
-
+function Forecast(forecastData) {
   const loadRecipe = () => {
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(
@@ -111,33 +134,51 @@ function Forecast (forecastData) {
     </body>
   );
 }
-const calculateForecast = () => {
-  let selectElement = document.querySelector("#Food");
-  //console.log(document.querySelector('#Food'));
-  if (selectElement.checked) {
+const calculateForecast = (a,b,c,d) => {
+  console.log(a,b,c,d);
+  let filteredData;
+  //THIS SETS FILTERED DATA TO THE OBJECT(IF ANY) THAT FITS THE SELECTIONS
+  fetch("data.json")
+  .then((response)=>response.json())
+  .then((data) => {
+    console.log(data);
+    jsondata=data.images
+    //FILTERS BY TEMP
+    filteredData = jsondata.filter(element => element.id == "50-60") ?? [];
+    // jsondata = JSON.parse(data);
+    console.log("First Check");
+    console.log(filteredData);
+  let selectElement = document.getElementById("Food");
+  console.log("Select Element = " +selectElement);
+  console.log("bi");
+  console.log(document.getElementById("Food"));
+  if (a) {
+    console.log("be");
+    filteredData = filteredData.filter(element => element.food == a) ?? [];
     console.log("Food is checked");
   }
-
-  selectElement = document.querySelector("#Drinks");
+  console.log("bo");
+  selectElement = document.getElementById("Drinks");
   // let drinks = selectElement.value;
-  if (selectElement.checked) {
+  if (b) {
+    filteredData = filteredData.filter(element => element.drink == b) ?? [];
     console.log("Drinks are checked");
   }
-  selectElement = document.querySelector("#Vegetarian");
+  selectElement = document.getElementById("Vegetarian");
   // let vegetarian = selectElement.value;
-  if (selectElement.checked) {
+  if (c) {
+    filteredData = filteredData.filter(element => element.vegetarian == c) ?? [];
     console.log("Vegetarian is checked");
   }
-  selectElement = document.querySelector("#Lactose-Free");
+  selectElement = document.getElementById("Lactose-Free");
   // let lactosefree = selectElement.value;
-  if (selectElement.checked) {
+  if (d) {
+    filteredData = filteredData.filter(element => element.dairy == d) ?? [];
     console.log("Lactose-Free is checked");
   }
-
-  //if(images.images[setTemp].food == food){use food and so forth}
-
+  console.log("Hi"+filteredData);
+  });
   let forecastData;
-
   fetch("data.json")
     .then((response) => response.json())
     .then((data) => {
@@ -156,6 +197,8 @@ const calculateForecast = () => {
     .then((response) => response.json())
     .then((images) => loadImages(images));
 };
+
+
 
 var temp;
 var hasRun = false;
@@ -187,7 +230,7 @@ const getTemp = () => {
   }
   hasRun = true;
 };
-
+var tempForFilter;
 const loadTemperature = (weather) => {
   var tempWeather = document.getElementById("curTemp");
   var imgWeather = document.getElementById("image");
@@ -201,30 +244,42 @@ const loadTemperature = (weather) => {
   if (temp < 0) {
     index = 0;
   } else if (temp >= 0 && temp < 10) {
+    tempForFilter="0-10"
     index = 1;
   } else if (temp >= 10 && temp < 20) {
+    tempForFilter="10-20"
     index = 2;
   } else if (temp >= 20 && temp < 30) {
+    tempForFilter="20-30"
     index = 3;
   } else if (temp >= 30 && temp < 40) {
+    tempForFilter="30-40"
     index = 4;
   } else if (temp >= 40 && temp < 50) {
+    tempForFilter="40-50"
     index = 5;
   } else if (temp >= 50 && temp < 60) {
+    tempForFilter="50-60"
     index = 6;
   } else if (temp >= 60 && temp < 70) {
+    tempForFilter="60-70"
     index = 7;
   } else if (temp >= 70 && temp < 80) {
+    tempForFilter="70-80"
     index = 8;
   } else if (temp >= 80 && temp < 90) {
+    tempForFilter="80-90"
     index = 9;
   } else if (temp >= 90 && temp < 100) {
+    tempForFilter="90-100"
     index = 10;
   } else if (temp >= 100 && temp < 110) {
+    tempForFilter="100-110"
     index = 11;
   } else {
     index = 12;
   }
+
 
   let image = weather.weather[index].image;
 
@@ -238,6 +293,10 @@ Based off the temperature outside, your view may look something like this: </p>`
   tempWeather.appendChild(outside);
   imgWeather.appendChild(img);
 };
+let jsondata;
+
+//sets jsondata to data
+
 
 var setTemp = 0;
 const loadImages = (images) => {
@@ -269,7 +328,7 @@ const loadImages = (images) => {
   } else if (temp > 100 && temp <= 110) {
     setTemp = 10;
   }
-
+  
   let url = images.images[setTemp].url;
   let name = images.images[setTemp].name;
   let desc = images.images[setTemp].desc;
@@ -288,15 +347,27 @@ const loadImages = (images) => {
   curText.appendChild(txt);
   curTemp.appendChild(tmp);
   curText2.appendChild(txt2);
+  
 };
-
 
 // style={{
 //   backgroundSize: "cover",
 //   backgroundImage: `url(https://i.guim.co.uk/img/media/8d904ba5091c05f48cd173406dfa974244e27732/93_193_4090_2454/master/4090.jpg?width=620&dpr=2&s=none)`
 // }}
 
+let HandleChange = (a,b) =>{
+  if(!a){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
 const Weather = () => {
+  let [FoodCheck, setFoodCheck]=useState(false);
+  let [DrinkCheck, setDrinkCheck]=useState(false);
+  let [VegetarianCheck, setVegetarianCheck]=useState(false);
+  let [DairyCheck, setDairyCheck]=useState(false);
   return (
     <body
       className="Weather"
@@ -320,9 +391,7 @@ const Weather = () => {
           </section>
           <section>
             <div className="center">
-              <h3 id="curTemp" className="coolTitle2" 
-              
-              />
+              <h3 id="curTemp" className="coolTitle2" />
             </div>
             <div className="center"></div>
             <div>{getTemp()}</div>
@@ -332,15 +401,52 @@ const Weather = () => {
           </section>
           <div className="center">
             <div className="center">
-            <label className="coolTitle"><input className="coolTitle" id="Food" name="food" type="checkbox" value="1" />Food</label>
-            <label className="coolTitle"><input className="coolTitle" id="Drinks" name="drinks" type="checkbox" value="1"/>Drinks</label>
-            <label className="coolTitle"><input className="coolTitle" id="Vegetarian" name="vegetarian" type="checkbox" value="1"/>Vegetarian</label>
-            <label className="coolTitle"><input className="coolTitle" id="Lactose-Free" name="lactose-free" type="checkbox" value="1" />Lactose-Free</label>
+              <label className="coolTitle">
+                <input
+                  className="coolTitle"
+                  id="Food"
+                  name="food"
+                  type="checkbox"
+                  value={FoodCheck} onChange={e=>FoodCheck=HandleChange(FoodCheck,true)}
+                  />
+                Food
+              </label>
+              <label className="coolTitle">
+                <input
+                  className="coolTitle"
+                  id="Drinks"
+                  name="drinks"
+                  type="checkbox"
+                  value={DrinkCheck} onChange={e=>DrinkCheck=HandleChange(DrinkCheck,true)}
+                  />
+              
+                Drinks
+              </label>
+              <label className="coolTitle">
+                <input
+                  className="coolTitle"
+                  id="Vegetarian"
+                  name="vegetarian"
+                  type="checkbox"
+                  value={VegetarianCheck} onChange={e=>VegetarianCheck=HandleChange(VegetarianCheck,true)}
+                  />
+                Vegetarian
+              </label>
+              <label className="coolTitle">
+                <input
+                  className="coolTitle"
+                  id="Lactose-Free"
+                  name="lactose-free"
+                  type="checkbox"
+                  value={DairyCheck} onChange={e=>DairyCheck=HandleChange(DairyCheck,true)}
+                  />
+                Lactose-Free
+              </label>
             </div>
           </div>
           <div className="center">
             <Button
-              onClick={calculateForecast}
+              onClick={()=>calculateForecast(FoodCheck,DrinkCheck,VegetarianCheck,DairyCheck)}
               label="Calculate my Foodie Forecast!"
             />
           </div>
