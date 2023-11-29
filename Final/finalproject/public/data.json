@@ -13,16 +13,6 @@
         "desc": "Tomato Soup; Hot Chocolate's savory cousin. If you're feeling frozen, go ahead and make yourself a bowl of this stuff."
       },
       {
-        "id": "10-20",
-        "food": "true",
-        "drink": "false",
-        "vegetarian": "false",
-        "dairy": "true",
-        "name": "Tandoori Chicken",
-        "url": "https://www.cubesnjuliennes.com/wp-content/uploads/2022/12/Tandoori-Chicken-Recipe.jpg",
-        "desc": "This meal is a tasty indian treat that will warm your heart and soul."
-      },
-      {
         "_id": {
           "$oid": "65555b0d42b5aae17656f3d0"
         },

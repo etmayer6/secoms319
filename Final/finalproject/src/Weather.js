@@ -1,43 +1,45 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./style.css";
-// var express = import("express");
-// var cors = import("cors");
+
+// const { MongoClient } = require("mongodb");
+
+// const url = "mongodb://127.0.0.1:27017";
+// const dbName = "FoodieForecast";
+// const client = new MongoClient(url);
+// const db = client.db(dbName);
+
+// var express = require("express");
+// var cors = require("cors");
 // var app = express();
-// var fs = import("fs");
-// var bodyParser = impo("body-parser");
+// //var fs = require("fs");
+// var bodyParser = require("body-parser");
 // app.use(cors());
 // app.use(bodyParser.json());
 // const port = "8081";
 // const host = "localhost";
 
-// app.listen(port, () => {
-//   console.log("App listening at http://%s:%s", host, port);
-// });
-// const { MongoClient } = require("mongodb");
-// const url = "mongodb://127.0.0.1:27017";
-// const dbName = "finalproject";
-// const client = new MongoClient(url);
-// const db = client.db(dbName);
 
-// app.get("/listRobots", async (req, res) => {
+// app.get("/foods", async (req, res) => {
 //   await client.connect();
 //   console.log("Node connected successfully to GET MongoDB");
 //   const query = {};
 //   const results = await db
-//     .collection("robots")
-//     .find(query)
-//     .limit(100)
-//     .toArray();
+//   .collection("FoodieForecast")
+//   .find(query)
+//   .limit(100)
+//   .toArray();
 //   console.log(results);
 //   res.status(200);
 //   res.send(results);
-// });
-//  const header={
-//   background-color:"cadetblue",
-//   color: "#fff",
-//   padding: 10px 0;
-// }
+//   });
+
+
+
+//   app.listen(port, () => {
+//       console.log("App listening at http://%s:%s", host, port);
+//       });
+
 
 
 const Button = ({ onClick, label }) => {
@@ -80,8 +82,41 @@ const loadFirstPage = () => {
 
 function POST() {
 
-  const postNewFood = () => {
-    
+
+  const [foodName, setName] = useState('');
+  const [url, setUrl] = useState('');
+  const [desc, setDesc] = useState('');
+  const [recipe, setRecipe] = useState('');
+  const [temperature, setTemperature] = useState('0-10');
+
+  let FoodCheck = false;
+  let DrinkCheck = false;
+  let VegetarianCheck = false;
+  let LactoseCheck = false;
+
+  const postNewFood = (e) => {
+    e.preventDefault();
+
+
+    console.log("Food name: " + foodName);
+    console.log("URL: " + url);
+    console.log("Description: " + desc);
+    console.log("Recipe: " + recipe);
+    console.log("Temperature range: " + temperature);
+    console.log(FoodCheck, DrinkCheck, VegetarianCheck, LactoseCheck);
+
+    const formData = {
+      "id": temperature,
+      "food": FoodCheck,
+      "drink": DrinkCheck,
+      "vegetarian": VegetarianCheck,
+      "dairy": LactoseCheck,
+      "name": foodName,
+      "url": url,
+      "desc": desc
+    };
+
+
   }
 
   return (
@@ -108,6 +143,7 @@ function POST() {
             <h3 className="coolTitle3">We were unable to calculate a food item that matches your search queries. Please try adding your own!</h3>
           </div>
         </section>
+        <form onSubmit={postNewFood}>
         <div className="center">
           <label className="coolTitle3">
             Name of food:
@@ -116,7 +152,8 @@ function POST() {
               type="text"
               id="Name"
               name="name"
-              value=""
+              value={foodName}
+              onChange={(e) => setName(e.target.value)}
             />
 
           </label>
@@ -127,7 +164,8 @@ function POST() {
               type="url"
               id="Url"
               name="url"
-              value=""
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
             />
 
           </label>
@@ -138,7 +176,8 @@ function POST() {
               type="text"
               id="Desc"
               name="desc"
-              value=""
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
             />
 
           </label>
@@ -149,7 +188,8 @@ function POST() {
               type="text"
               id="Recipe"
               name="recipe"
-              value=""
+              value={recipe}
+              onChange={(e) => setRecipe(e.target.value)}
             />
 
           </label>
@@ -157,7 +197,9 @@ function POST() {
         <div className="center">
           <label className="coolTitle3">
             Temperature:
-            <select className="coolTitle">
+            <select className="coolTitle"
+                    value ={temperature}
+                    onChange={(e) => setTemperature(e.target.value)}>
               <option>0-10</option>
               <option>10-20</option>
               <option>20-30</option>
@@ -180,7 +222,7 @@ function POST() {
               id="Food"
               name="food"
               type="checkbox"
-              value=""
+              value={FoodCheck} onChange={e => FoodCheck = HandleChange(FoodCheck, true)}
             />
             Is Food?
           </label>
@@ -190,7 +232,7 @@ function POST() {
               id="Drinks"
               name="drinks"
               type="checkbox"
-              value=""
+              value={DrinkCheck} onChange={e => DrinkCheck = HandleChange(DrinkCheck, true)}
             />
 
             Is Drink?
@@ -201,7 +243,7 @@ function POST() {
               id="Vegetarian"
               name="vegetarian"
               type="checkbox"
-              value=""
+              value={VegetarianCheck} onChange={e => VegetarianCheck = HandleChange(VegetarianCheck, true)}
             />
             Is Vegetarian?
           </label>
@@ -211,14 +253,18 @@ function POST() {
               id="Lactose-Free"
               name="lactose-free"
               type="checkbox"
-              value=""
+              value={LactoseCheck} onChange={e => LactoseCheck = HandleChange(LactoseCheck, true)}
             />
             Is Lactose-Free?
           </label>
         </div>
+        <section>
         <div className="center">
-          <Button onClick={postNewFood} label = "Post"></Button>
+          <input className="coolTitle3" type="submit" value="Submit"></input>
         </div>
+
+        </section>
+        </form>
       </div>
 
 
@@ -327,7 +373,7 @@ const calculateForecast = (a, b, c, d) => {
 
     console.log(a, b, c, d);
     //THIS SETS FILTERED DATA TO THE OBJECT(IF ANY) THAT FITS THE SELECTIONS
-    fetch("data.json")
+    fetch("http://localhost:8081/foods")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -584,16 +630,6 @@ let jsondata;
 
 var setTemp = 0;
 const loadImages = () => {
-
-
-  //we need to rewrite this entire method!
-
-
-
-
-
-
-
 
 
 
