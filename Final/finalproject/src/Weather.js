@@ -4,6 +4,11 @@ import "./style.css";
 import Container from 'react-bootstrap/Container';
 //bootstrap
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha256-2TnSHycBDAm2wpZmgdi0z81kykGPJAkiUY+Wf97RbvY=" crossorigin="anonymous"></link>
+//import { MongoClient } from "mongodb";
+//import express from "express";
+//import cors from "cors";
+//import bodyParser from "body-parser";
+
 // const { MongoClient } = require("mongodb");
 
 // const url = "mongodb://127.0.0.1:27017";
@@ -11,10 +16,10 @@ import Container from 'react-bootstrap/Container';
 // const client = new MongoClient(url);
 // const db = client.db(dbName);
 
-var express = require("express");
-var cors = require("cors");
-var app = express();
-var fs = require("fs");
+//var express = require("express");
+// var cors = require("cors");
+// var app = express();
+// var fs = require("fs");
 // var bodyParser = require("body-parser");
 // app.use(cors());
 // app.use(bodyParser.json());
@@ -442,8 +447,8 @@ const calculateForecast = (a, b, c, d) => {
   const filterJSON = (a, b, c, d) => {
     console.log(a, b, c, d);
     //THIS SETS FILTERED DATA TO THE OBJECT(IF ANY) THAT FITS THE SELECTIONS
-    fetch("data.json") //json file
-      // fetch("http://localhost:8081/foods") //data
+    //fetch("http://localhost:8081/foods")
+    fetch("./data.json")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -522,16 +527,17 @@ const calculateForecast = (a, b, c, d) => {
 
         //if dairy is checked
         if (d) {
-          vegetarianFilteredArray.forEach((element) => {
-            if (element.dairy == "true") {
-              console.log("Dairy = true");
+          vegetarianFilteredArray.forEach(element => {
+
+            if (element.dairy == "false") {
               finalFilteredArray.push(element);
             }
           });
-        } else {
-          vegetarianFilteredArray.forEach((element) => {
-            if (element.dairy == "false") {
-              console.log("Dairy = false");
+        }
+        else {
+          vegetarianFilteredArray.forEach(element => {
+
+            if (element.dairy == "true") {
               finalFilteredArray.push(element);
             }
           });
