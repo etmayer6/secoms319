@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./style.css";
+//import { MongoClient } from "mongodb";
+//import express from "express";
+//import cors from "cors";
+//import bodyParser from "body-parser";
 
 // const { MongoClient } = require("mongodb");
 
@@ -9,10 +13,10 @@ import "./style.css";
 // const client = new MongoClient(url);
 // const db = client.db(dbName);
 
-// var express = require("express");
+//var express = require("express");
 // var cors = require("cors");
 // var app = express();
-// //var fs = require("fs");
+// var fs = require("fs");
 // var bodyParser = require("body-parser");
 // app.use(cors());
 // app.use(bodyParser.json());
@@ -373,7 +377,8 @@ const calculateForecast = (a, b, c, d) => {
 
     console.log(a, b, c, d);
     //THIS SETS FILTERED DATA TO THE OBJECT(IF ANY) THAT FITS THE SELECTIONS
-    fetch("http://localhost:8081/foods")
+    //fetch("http://localhost:8081/foods")
+    fetch("./data.json")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -461,7 +466,7 @@ const calculateForecast = (a, b, c, d) => {
         if (d) {
           vegetarianFilteredArray.forEach(element => {
 
-            if (element.dairy == "true") {
+            if (element.dairy == "false") {
               finalFilteredArray.push(element);
             }
           });
@@ -469,7 +474,7 @@ const calculateForecast = (a, b, c, d) => {
         else {
           vegetarianFilteredArray.forEach(element => {
 
-            if (element.dairy == "false") {
+            if (element.dairy == "true") {
               finalFilteredArray.push(element);
             }
           });
