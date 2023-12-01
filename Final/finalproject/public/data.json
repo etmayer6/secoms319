@@ -10,6 +10,7 @@
         "dairy": "false",
         "name": "Tomato Soup",
         "url": "https://daenskitchen.com/wp-content/uploads/2022/06/Tomato-Soup-Daens-Kitchen-High-Res-6-        scaled.jpg",
+       
         "desc": "Tomato Soup; Hot Chocolate's savory cousin. If you're feeling frozen, go ahead and make yourself a bowl of this stuff."
       },
       {
@@ -50,7 +51,8 @@
         "dairy": "true",
         "name": "Lasagna",
         "url": "https://www.southernliving.com/thmb/x5xM5QvARl_og39g1jD1N1HfUlA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Extra_Easy_Lasagna_005_16x9-24d8c7469367440bb9aad73e9a83ded9.jpg",
-        "desc": "Lasagna is a stomach-warming treat for days when your fingertips are cold."
+        "desc": "Lasagna is a stomach-warming treat for days when your fingertips are cold.",
+        "recipe": "https://www.spendwithpennies.com/easy-homemade-lasagna/"
       },
       {
         "_id": {

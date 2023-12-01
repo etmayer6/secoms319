@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./style.css";
-
+import Container from 'react-bootstrap/Container';
+//bootstrap
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha256-2TnSHycBDAm2wpZmgdi0z81kykGPJAkiUY+Wf97RbvY=" crossorigin="anonymous"></link>
 // const { MongoClient } = require("mongodb");
 
 // const url = "mongodb://127.0.0.1:27017";
@@ -9,16 +11,15 @@ import "./style.css";
 // const client = new MongoClient(url);
 // const db = client.db(dbName);
 
-// var express = require("express");
-// var cors = require("cors");
-// var app = express();
-// //var fs = require("fs");
+var express = require("express");
+var cors = require("cors");
+var app = express();
+var fs = require("fs");
 // var bodyParser = require("body-parser");
 // app.use(cors());
 // app.use(bodyParser.json());
 // const port = "8081";
 // const host = "localhost";
-
 
 // app.get("/foods", async (req, res) => {
 //   await client.connect();
@@ -34,13 +35,9 @@ import "./style.css";
 //   res.send(results);
 //   });
 
-
-
 //   app.listen(port, () => {
 //       console.log("App listening at http://%s:%s", host, port);
 //       });
-
-
 
 const Button = ({ onClick, label }) => {
   return (
@@ -50,29 +47,107 @@ const Button = ({ onClick, label }) => {
   );
 };
 
+function ShowStudentInfo(){
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(
+    <div>
+      <StudentInfo />
+    </div>
+  );
+  
+}
+
+function StudentInfo(){
+  
+  const backFromStudentInfo =() =>{
+    loadFirstPage();
+  }
+
+  return (
+    <>
+    <section>
+        <h1 style={{textAlign: "center"}}className="coolfont">
+            SE COMS 319: Construction of User Interfaces
+        </h1>
+    </section>
+    <section>
+        <h1 style={{textAlign: "center"}}className="coolfont">
+            Developer Credits
+        </h1>
+    </section>
+    <section>
+        <h1 style={{textAlign: "center"}}className="coolfont">
+            September 23, 2023
+        </h1>
+    </section>
+
+    <div className="col1">
+        <div><img src="./calhf.jpg" className="imagechanger"/>
+        </div>
+        <div>
+        <h1 className="coolfont">
+            Cal Hokanson-Fuchs
+        </h1>
+        <p style={{textAlign: "center"}} className="coolfont">calhf@iastate.edu</p>
+        </div>
+    </div>
+    
+    <div className="col2">
+        <div><img src="./profile.jpg" className="imagechanger"/>
+        </div>
+      
+          <h1 className="coolfont">Ethan Mayer</h1>
+          <p style={{textAlign: "center", margin: "10", marginBottom: "60"}} className="coolfont">
+            etmayer@iastate.edu
+          </p>
+        
+    </div>
+    <div className="center">
+        <Button
+              onClick={() =>
+                backFromStudentInfo()
+              }
+              label="Show Student Info"
+        />
+    </div>
+    <div className="footer">
+        
+        <p style={{textAlign: "center", fontSize: "large"}} className="coolfont" >
+            Professor: Abraham Aldaco, aaldaco@iastate.edu
+        </p>
+       
+    </div>
+    </>
+  )
+}
+
+
+
 function Recipe() {
   const backFromRecipe = () => {
     loadFirstPage();
   };
 
-
-
-
+  //HTML FOR displaying the recipe page within the recipe
   return (
-    <body
-      className="Recipe"
+  
+    <body className="Recipe"
       style={{
         backgroundSize: "cover",
         backgroundImage: `url("https://t4.ftcdn.net/jpg/05/52/88/59/360_F_552885945_3mKs02TFNxZS8ztXp2wYpPWDyjA57fXx.jpg")`,
-      }}>
-      <div className="center">
-        <h3 id="recipe" className="coolTitle3"></h3>
-
-        <div className="center">
-          <Button onClick={backFromRecipe} label="Back" />
+      }}>   
+        <div className="center" >
+          <h3 id="recipe">
+            
+          </h3>
+          {/* this is in case we want to have links to pages with recipes in it */}
+          {/* <iframe src="https://www.spendwithpennies.com/easy-homemade-lasagna/" height="500px" width="100%"></iframe> */}
+          <div className="center">
+            <Button onClick={backFromRecipe} label="Back" />
+          </div>
         </div>
-      </div>
     </body>
+    
   );
 }
 
@@ -81,13 +156,11 @@ const loadFirstPage = () => {
 };
 
 function POST() {
-
-
-  const [foodName, setName] = useState('');
-  const [url, setUrl] = useState('');
-  const [desc, setDesc] = useState('');
-  const [recipe, setRecipe] = useState('');
-  const [temperature, setTemperature] = useState('0-10');
+  const [foodName, setName] = useState("");
+  const [url, setUrl] = useState("");
+  const [desc, setDesc] = useState("");
+  const [recipe, setRecipe] = useState("");
+  const [temperature, setTemperature] = useState("0-10");
 
   let FoodCheck = false;
   let DrinkCheck = false;
@@ -97,7 +170,6 @@ function POST() {
   const postNewFood = (e) => {
     e.preventDefault();
 
-
     console.log("Food name: " + foodName);
     console.log("URL: " + url);
     console.log("Description: " + desc);
@@ -106,18 +178,16 @@ function POST() {
     console.log(FoodCheck, DrinkCheck, VegetarianCheck, LactoseCheck);
 
     const formData = {
-      "id": temperature,
-      "food": FoodCheck,
-      "drink": DrinkCheck,
-      "vegetarian": VegetarianCheck,
-      "dairy": LactoseCheck,
-      "name": foodName,
-      "url": url,
-      "desc": desc
+      id: temperature,
+      food: FoodCheck,
+      drink: DrinkCheck,
+      vegetarian: VegetarianCheck,
+      dairy: LactoseCheck,
+      name: foodName,
+      url: url,
+      desc: desc,
     };
-
-
-  }
+  };
 
   return (
     <body
@@ -125,7 +195,8 @@ function POST() {
       style={{
         backgroundSize: "cover",
         backgroundImage: `url(${require("./sun-images.jpg")})`,
-      }}>
+      }}
+    >
       <div>
         <section>
           <div className="center">
@@ -140,134 +211,142 @@ function POST() {
         </section>
         <section>
           <div>
-            <h3 className="coolTitle3">We were unable to calculate a food item that matches your search queries. Please try adding your own!</h3>
+            <h3 className="coolTitle3">
+              We were unable to calculate a food item that matches your search
+              queries. Please try adding your own!
+            </h3>
           </div>
         </section>
         <form onSubmit={postNewFood}>
-        <div className="center">
-          <label className="coolTitle3">
-            Name of food:
-            <input
-              className="coolTitle"
-              type="text"
-              id="Name"
-              name="name"
-              value={foodName}
-              onChange={(e) => setName(e.target.value)}
-            />
-
-          </label>
-          <label className="coolTitle3">
-            Image URL:
-            <input
-              className="coolTitle"
-              type="url"
-              id="Url"
-              name="url"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-            />
-
-          </label>
-          <label className="coolTitle3">
-            Description:
-            <input
-              className="coolTitle"
-              type="text"
-              id="Desc"
-              name="desc"
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)}
-            />
-
-          </label>
-          <label className="coolTitle3">
-            Recipe:
-            <input
-              className="coolTitle"
-              type="text"
-              id="Recipe"
-              name="recipe"
-              value={recipe}
-              onChange={(e) => setRecipe(e.target.value)}
-            />
-
-          </label>
-        </div>
-        <div className="center">
-          <label className="coolTitle3">
-            Temperature:
-            <select className="coolTitle"
-                    value ={temperature}
-                    onChange={(e) => setTemperature(e.target.value)}>
-              <option>0-10</option>
-              <option>10-20</option>
-              <option>20-30</option>
-              <option>30-40</option>
-              <option>40-50</option>
-              <option>50-60</option>
-              <option>60-70</option>
-              <option>70-80</option>
-              <option>80-90</option>
-              <option>90-100</option>
-              <option>100-110</option>
-
-            </select>
-          </label>
-        </div>
-        <div className="center">
-          <label className="coolTitle">
-            <input
-              className="coolTitle"
-              id="Food"
-              name="food"
-              type="checkbox"
-              value={FoodCheck} onChange={e => FoodCheck = HandleChange(FoodCheck, true)}
-            />
-            Is Food?
-          </label>
-          <label className="coolTitle">
-            <input
-              className="coolTitle"
-              id="Drinks"
-              name="drinks"
-              type="checkbox"
-              value={DrinkCheck} onChange={e => DrinkCheck = HandleChange(DrinkCheck, true)}
-            />
-
-            Is Drink?
-          </label>
-          <label className="coolTitle">
-            <input
-              className="coolTitle"
-              id="Vegetarian"
-              name="vegetarian"
-              type="checkbox"
-              value={VegetarianCheck} onChange={e => VegetarianCheck = HandleChange(VegetarianCheck, true)}
-            />
-            Is Vegetarian?
-          </label>
-          <label className="coolTitle">
-            <input
-              className="coolTitle"
-              id="Lactose-Free"
-              name="lactose-free"
-              type="checkbox"
-              value={LactoseCheck} onChange={e => LactoseCheck = HandleChange(LactoseCheck, true)}
-            />
-            Is Lactose-Free?
-          </label>
-        </div>
-        <section>
-        <div className="center">
-          <input className="coolTitle3" type="submit" value="Submit"></input>
-        </div>
-
-        </section>
+          <div className="center">
+            <label className="coolTitle3">
+              Name of food:
+              <input
+                className="coolTitle"
+                type="text"
+                id="Name"
+                name="name"
+                value={foodName}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </label>
+            <label className="coolTitle3">
+              Image URL:
+              <input
+                className="coolTitle"
+                type="url"
+                id="Url"
+                name="url"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+              />
+            </label>
+            <label className="coolTitle3">
+              Description:
+              <input
+                className="coolTitle"
+                type="text"
+                id="Desc"
+                name="desc"
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+              />
+            </label>
+            <label className="coolTitle3">
+              Recipe:
+              <input
+                className="coolTitle"
+                type="text"
+                id="Recipe"
+                name="recipe"
+                value={recipe}
+                onChange={(e) => setRecipe(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="center">
+            <label className="coolTitle3">
+              Temperature:
+              <select
+                className="coolTitle"
+                value={temperature}
+                onChange={(e) => setTemperature(e.target.value)}
+              >
+                <option>0-10</option>
+                <option>10-20</option>
+                <option>20-30</option>
+                <option>30-40</option>
+                <option>40-50</option>
+                <option>50-60</option>
+                <option>60-70</option>
+                <option>70-80</option>
+                <option>80-90</option>
+                <option>90-100</option>
+                <option>100-110</option>
+              </select>
+            </label>
+          </div>
+          <div className="center">
+            <label className="coolTitle">
+              <input
+                className="coolTitle"
+                id="Food"
+                name="food"
+                type="checkbox"
+                value={FoodCheck}
+                onChange={(e) => (FoodCheck = HandleChange(FoodCheck, true))}
+              />
+              Is Food?
+            </label>
+            <label className="coolTitle">
+              <input
+                className="coolTitle"
+                id="Drinks"
+                name="drinks"
+                type="checkbox"
+                value={DrinkCheck}
+                onChange={(e) => (DrinkCheck = HandleChange(DrinkCheck, true))}
+              />
+              Is Drink?
+            </label>
+            <label className="coolTitle">
+              <input
+                className="coolTitle"
+                id="Vegetarian"
+                name="vegetarian"
+                type="checkbox"
+                value={VegetarianCheck}
+                onChange={(e) =>
+                  (VegetarianCheck = HandleChange(VegetarianCheck, true))
+                }
+              />
+              Is Vegetarian?
+            </label>
+            <label className="coolTitle">
+              <input
+                className="coolTitle"
+                id="Lactose-Free"
+                name="lactose-free"
+                type="checkbox"
+                value={LactoseCheck}
+                onChange={(e) =>
+                  (LactoseCheck = HandleChange(LactoseCheck, true))
+                }
+              />
+              Is Lactose-Free?
+            </label>
+          </div>
+          <section>
+            <div className="center">
+              <input
+                className="coolTitle3"
+                type="submit"
+                value="Submit"
+              ></input>
+            </div>
+          </section>
         </form>
       </div>
-
-
     </body>
   );
 }
@@ -288,20 +367,17 @@ function Forecast() {
 
       let recipeID = document.getElementById("recipe");
 
-      let recipeHTML = document.createElement("p")
+      let recipeHTML = document.createElement("p");
 
       recipeHTML.innerHTML = `<p className="center">${recipe}</p>`;
 
       recipeID.appendChild(recipeHTML);
-    }
+    };
 
     setTimeout(() => {
       appendRecipe();
     }, 200);
   };
-
-
-
 
   return (
     <body
@@ -331,7 +407,6 @@ function Forecast() {
           </section>
 
           <section>
-
             <div className="center">
               <h3 id="text" className="coolTitle">
                 Based on your weather, and preferences we recommend you eat:{" "}
@@ -353,13 +428,10 @@ function Forecast() {
               <Button onClick={loadRecipe} label="See Recipe" />
             </div>
             <div className="center">
-
               <Button onClick={loadFirstPage} label="Back" />
-
             </div>
           </section>
         </div>
-
       </div>
     </body>
   );
@@ -367,22 +439,19 @@ function Forecast() {
 var finalFilteredArray = [];
 
 const calculateForecast = (a, b, c, d) => {
-
-
   const filterJSON = (a, b, c, d) => {
-
     console.log(a, b, c, d);
     //THIS SETS FILTERED DATA TO THE OBJECT(IF ANY) THAT FITS THE SELECTIONS
-    fetch("http://localhost:8081/foods")
+    fetch("data.json") //json file
+      // fetch("http://localhost:8081/foods") //data
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        jsondata = data.images
+        jsondata = data.images;
 
         const temperatureFilteredArray = [];
 
-        jsondata.forEach(element => {
-
+        jsondata.forEach((element) => {
           if (element.id == tempForFilter) {
             temperatureFilteredArray.push(element);
           }
@@ -392,19 +461,18 @@ const calculateForecast = (a, b, c, d) => {
         console.log(temperatureFilteredArray);
 
         const foodFilteredArray = [];
-
+        //if food is checked
         if (a) {
-          temperatureFilteredArray.forEach(element => {
-
+          temperatureFilteredArray.forEach((element) => {
             if (element.food == "true") {
+              console.log("Food = true");
               foodFilteredArray.push(element);
             }
           });
-        }
-        else {
-          temperatureFilteredArray.forEach(element => {
-
+        } else {
+          temperatureFilteredArray.forEach((element) => {
             if (element.food == "false") {
+              console.log("Food = false");
               foodFilteredArray.push(element);
             }
           });
@@ -412,21 +480,19 @@ const calculateForecast = (a, b, c, d) => {
         console.log("Food filter");
         console.log(foodFilteredArray);
 
-
         const drinkFilteredArray = [];
-
+        //if drink is checked
         if (b) {
-          foodFilteredArray.forEach(element => {
-
+          foodFilteredArray.forEach((element) => {
             if (element.drink == "true") {
+              console.log("Drink = true");
               drinkFilteredArray.push(element);
             }
           });
-        }
-        else {
-          foodFilteredArray.forEach(element => {
-
+        } else {
+          foodFilteredArray.forEach((element) => {
             if (element.drink == "false") {
+              console.log("Drink = false");
               drinkFilteredArray.push(element);
             }
           });
@@ -434,21 +500,19 @@ const calculateForecast = (a, b, c, d) => {
         console.log("Drink filter");
         console.log(drinkFilteredArray);
 
-
         const vegetarianFilteredArray = [];
-
+        //if vegetarian is checked
         if (c) {
-          drinkFilteredArray.forEach(element => {
-
+          drinkFilteredArray.forEach((element) => {
             if (element.vegetarian == "true") {
+              console.log("Veg = true");
               vegetarianFilteredArray.push(element);
             }
           });
-        }
-        else {
-          drinkFilteredArray.forEach(element => {
-
+        } else {
+          drinkFilteredArray.forEach((element) => {
             if (element.vegetarian == "false") {
+              console.log("Veg = false");
               vegetarianFilteredArray.push(element);
             }
           });
@@ -456,20 +520,18 @@ const calculateForecast = (a, b, c, d) => {
         console.log("Vegetarian filter");
         console.log(vegetarianFilteredArray);
 
-
-
+        //if dairy is checked
         if (d) {
-          vegetarianFilteredArray.forEach(element => {
-
+          vegetarianFilteredArray.forEach((element) => {
             if (element.dairy == "true") {
+              console.log("Dairy = true");
               finalFilteredArray.push(element);
             }
           });
-        }
-        else {
-          vegetarianFilteredArray.forEach(element => {
-
+        } else {
+          vegetarianFilteredArray.forEach((element) => {
             if (element.dairy == "false") {
+              console.log("Dairy = false");
               finalFilteredArray.push(element);
             }
           });
@@ -478,18 +540,13 @@ const calculateForecast = (a, b, c, d) => {
         console.log(finalFilteredArray);
 
         // console.log("rendered");
-
-
       });
-
   };
 
   filterJSON(a, b, c, d);
 
   setTimeout(() => {
-
-    if (finalFilteredArray.length) {
-
+    if (finalFilteredArray.length != 0) {
       const renderForecast = () => {
         const root = ReactDOM.createRoot(document.getElementById("root"));
         root.render(
@@ -497,38 +554,29 @@ const calculateForecast = (a, b, c, d) => {
             <div>
               <Forecast />
             </div>
-
           </div>
         );
-
-      }
+      };
 
       renderForecast();
-
 
       // console.log("rendered");
 
       setTimeout(() => {
         loadImages();
       }, 200);
-    }
-    else {
+    } else {
       const root = ReactDOM.createRoot(document.getElementById("root"));
       root.render(
         <div>
           <div>
             <POST />
           </div>
-
         </div>
       );
     }
   }, 200);
-}
-
-
-
-
+};
 
 var temp;
 var hasRun = false;
@@ -574,42 +622,41 @@ const loadTemperature = (weather) => {
   if (temp < 0) {
     index = 0;
   } else if (temp >= 0 && temp < 10) {
-    tempForFilter = "0-10"
+    tempForFilter = "0-10";
     index = 1;
   } else if (temp >= 10 && temp < 20) {
-    tempForFilter = "10-20"
+    tempForFilter = "10-20";
     index = 2;
   } else if (temp >= 20 && temp < 30) {
-    tempForFilter = "20-30"
+    tempForFilter = "20-30";
     index = 3;
   } else if (temp >= 30 && temp < 40) {
-    tempForFilter = "30-40"
+    tempForFilter = "30-40";
     index = 4;
   } else if (temp >= 40 && temp < 50) {
-    tempForFilter = "40-50"
+    tempForFilter = "40-50";
     index = 5;
   } else if (temp >= 50 && temp < 60) {
-    tempForFilter = "50-60"
+    tempForFilter = "50-60";
     index = 6;
   } else if (temp >= 60 && temp < 70) {
-    tempForFilter = "60-70"
+    tempForFilter = "60-70";
     index = 7;
   } else if (temp >= 70 && temp < 80) {
-    tempForFilter = "70-80"
+    tempForFilter = "70-80";
     index = 8;
   } else if (temp >= 80 && temp < 90) {
-    tempForFilter = "80-90"
+    tempForFilter = "80-90";
     index = 9;
   } else if (temp >= 90 && temp < 100) {
-    tempForFilter = "90-100"
+    tempForFilter = "90-100";
     index = 10;
   } else if (temp >= 100 && temp < 110) {
-    tempForFilter = "100-110"
+    tempForFilter = "100-110";
     index = 11;
   } else {
     index = 12;
   }
-
 
   let image = weather.weather[index].image;
 
@@ -627,14 +674,9 @@ let jsondata;
 
 //sets jsondata to data
 
-
 var setTemp = 0;
 const loadImages = () => {
-
-
-
   var images = finalFilteredArray;
-
 
   console.log(images);
 
@@ -667,7 +709,6 @@ const loadImages = () => {
   curText.appendChild(txt);
   curTemp.appendChild(tmp);
   curText2.appendChild(txt2);
-
 };
 
 // style={{
@@ -678,11 +719,10 @@ const loadImages = () => {
 let HandleChange = (a, b) => {
   if (!a) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
-}
+};
 const Weather = () => {
   let [FoodCheck, setFoodCheck] = useState(false);
   let [DrinkCheck, setDrinkCheck] = useState(false);
@@ -727,7 +767,8 @@ const Weather = () => {
                   id="Food"
                   name="food"
                   type="checkbox"
-                  value={FoodCheck} onChange={e => FoodCheck = HandleChange(FoodCheck, true)}
+                  value={FoodCheck}
+                  onChange={(e) => (FoodCheck = HandleChange(FoodCheck, true))}
                 />
                 Food
               </label>
@@ -737,9 +778,11 @@ const Weather = () => {
                   id="Drinks"
                   name="drinks"
                   type="checkbox"
-                  value={DrinkCheck} onChange={e => DrinkCheck = HandleChange(DrinkCheck, true)}
+                  value={DrinkCheck}
+                  onChange={(e) =>
+                    (DrinkCheck = HandleChange(DrinkCheck, true))
+                  }
                 />
-
                 Drinks
               </label>
               <label className="coolTitle">
@@ -748,7 +791,10 @@ const Weather = () => {
                   id="Vegetarian"
                   name="vegetarian"
                   type="checkbox"
-                  value={VegetarianCheck} onChange={e => VegetarianCheck = HandleChange(VegetarianCheck, true)}
+                  value={VegetarianCheck}
+                  onChange={(e) =>
+                    (VegetarianCheck = HandleChange(VegetarianCheck, true))
+                  }
                 />
                 Vegetarian
               </label>
@@ -758,16 +804,36 @@ const Weather = () => {
                   id="Lactose-Free"
                   name="lactose-free"
                   type="checkbox"
-                  value={DairyCheck} onChange={e => DairyCheck = HandleChange(DairyCheck, true)}
+                  value={DairyCheck}
+                  onChange={(e) =>
+                    (DairyCheck = HandleChange(DairyCheck, true))
+                  }
+                  //I realize that the logic between this and our json file is backwards, so I'm changing this from lactose-free to the opposite(dairy)
                 />
-                Lactose-Free
+                Dairy
               </label>
             </div>
           </div>
           <div className="center">
             <Button
-              onClick={() => calculateForecast(FoodCheck, DrinkCheck, VegetarianCheck, DairyCheck)}
+              onClick={() =>
+                calculateForecast(
+                  FoodCheck,
+                  DrinkCheck,
+                  VegetarianCheck,
+                  DairyCheck
+                )
+              }
               label="Calculate my Foodie Forecast!"
+            />
+           
+          </div>
+          <div className="center">
+          <Button
+              onClick={() =>
+                ShowStudentInfo()
+              }
+              label="Show Student Info"
             />
           </div>
         </div>

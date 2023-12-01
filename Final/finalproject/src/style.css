@@ -76,6 +76,10 @@ header{
     border: black 5px solid;
     width: 380px;
     height:380px; 
-    
+    text-align: center;
     object-position: center;
+}
+.recipe{
+    width: 100%;
+
 }
