@@ -448,7 +448,7 @@ const calculateForecast = (a, b, c, d) => {
     console.log(a, b, c, d);
     //THIS SETS FILTERED DATA TO THE OBJECT(IF ANY) THAT FITS THE SELECTIONS
     //fetch("http://localhost:8081/foods")
-    fetch("./data.json")
+    fetch("data.json")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
