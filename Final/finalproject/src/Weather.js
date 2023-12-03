@@ -142,11 +142,10 @@ function Recipe() {
         backgroundImage: `url("https://t4.ftcdn.net/jpg/05/52/88/59/360_F_552885945_3mKs02TFNxZS8ztXp2wYpPWDyjA57fXx.jpg")`,
       }}>   
         <div className="center" >
-          <h3 id="recipe">
+          <div id="recipe">
             
-          </h3>
-          {/* this is in case we want to have links to pages with recipes in it */}
-          {/* <iframe src="https://www.spendwithpennies.com/easy-homemade-lasagna/" height="500px" width="100%"></iframe> */}
+          </div>
+
           <div className="center">
             <Button onClick={backFromRecipe} label="Back" />
           </div>
@@ -375,9 +374,9 @@ function Forecast() {
 
       let recipeID = document.getElementById("recipe");
 
-      let recipeHTML = document.createElement("p");
+      let recipeHTML = document.createElement("div");
 
-      recipeHTML.innerHTML = `<p className="center">${recipe}</p>`;
+      recipeHTML.innerHTML = `<iframe src=${recipe} height="700px" width="100%"></iframe>`;
 
       recipeID.appendChild(recipeHTML);
     };
@@ -532,7 +531,7 @@ const calculateForecast = (a, b, c, d) => {
         if (d) {
           vegetarianFilteredArray.forEach(element => {
 
-            if (element.dairy == "false") {
+            if (element.dairy == "true") {
               finalFilteredArray.push(element);
             }
           });
@@ -540,7 +539,7 @@ const calculateForecast = (a, b, c, d) => {
         else {
           vegetarianFilteredArray.forEach(element => {
 
-            if (element.dairy == "true") {
+            if (element.dairy == "false") {
               finalFilteredArray.push(element);
             }
           });

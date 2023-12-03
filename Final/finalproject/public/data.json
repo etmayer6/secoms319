@@ -10,7 +10,7 @@
         "dairy": "false",
         "name": "Tomato Soup",
         "url": "https://daenskitchen.com/wp-content/uploads/2022/06/Tomato-Soup-Daens-Kitchen-High-Res-6-        scaled.jpg",
-       
+        "recipe": "https://natashaskitchen.com/tomato-soup-recipe/",
         "desc": "Tomato Soup; Hot Chocolate's savory cousin. If you're feeling frozen, go ahead and make yourself a bowl of this stuff."
       },
       {
@@ -24,6 +24,7 @@
         "dairy": "true",
         "name": "Hot Chocolate",
         "url": "https://feelgoodfoodie.net/wp-content/uploads/2021/11/how-to-make-hot-chocolate-7.jpg",
+        "recipe": "https://celebratingsweets.com/homemade-hot-chocolate/",
         "desc": "What drink is better than Hot Chocolate at reminding you of great winter experiences long gone by? None."
       },
       {
@@ -38,7 +39,7 @@
         "name": "Pulled Pork BBQ",
         "url": "https://slowcookergourmet.net/wp-content/uploads/2020/06/Slow-Cooker-BBQ-Pulled-Pork-10-of-10.jpg",
         "desc": "Pulled Pork BBQ sandwiches are great at keeping you energized on cold winter days.",
-        "recipe": "Make the pork tasty. This is a test to see how a really long recipe would look on this site. Just need to type quite a bit and eventually it will be long enough for the test. Do you think this will be long enough? I don't think so. I want to see it jsut a bit longer to make certain. This is probably good."
+        "recipe": "https://www.melskitchencafe.com/bbq-pulled-pork-sandwiches-slow-cooker/"
       },
       {
         "_id": {
@@ -65,6 +66,7 @@
         "dairy": "true",
         "name": "Cheeseburger Sliders",
         "url": "https://i0.wp.com/www.onceuponachef.com/images/2017/08/Southwestern-Cheeseburger-Sliders-1.jpg?resize=760%2C533&ssl=1",
+        "recipe": "https://natashaskitchen.com/cheeseburger-sliders/",
         "desc": "While slightly harder to make, these Sliders' taste makes up for the effort."
       },
       {
