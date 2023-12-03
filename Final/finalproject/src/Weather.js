@@ -349,6 +349,9 @@ function POST() {
                 value="Submit"
               ></input>
             </div>
+            <div className="center">
+              <Button className="coolTitle3" onClick={loadFirstPage} label="Back"></Button>
+            </div>
           </section>
         </form>
       </div>
