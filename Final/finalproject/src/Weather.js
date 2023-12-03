@@ -82,11 +82,11 @@ function StudentInfo(){
     </section>
     <section>
         <h1 style={{textAlign: "center"}}className="coolfont">
-            September 23, 2023
+            December 3, 2023
         </h1>
     </section>
 
-    <div className="col1">
+    <div className="center">
         <div><img src="./calhf.jpg" className="imagechanger"/>
         </div>
         <div>
@@ -97,7 +97,7 @@ function StudentInfo(){
         </div>
     </div>
     
-    <div className="col2">
+    <div className="center">
         <div><img src="./profile.jpg" className="imagechanger"/>
         </div>
       
@@ -112,7 +112,7 @@ function StudentInfo(){
               onClick={() =>
                 backFromStudentInfo()
               }
-              label="Show Student Info"
+              label="Back"
         />
     </div>
     <div className="footer">
