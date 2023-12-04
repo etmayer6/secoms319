@@ -4,45 +4,6 @@ import "./style.css";
 import Container from 'react-bootstrap/Container';
 //bootstrap
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha256-2TnSHycBDAm2wpZmgdi0z81kykGPJAkiUY+Wf97RbvY=" crossorigin="anonymous"></link>
-//import { MongoClient } from "mongodb";
-//import express from "express";
-//import cors from "cors";
-//import bodyParser from "body-parser";
-
-// const { MongoClient } = require("mongodb");
-
-// const url = "mongodb://127.0.0.1:27017";
-// const dbName = "FoodieForecast";
-// const client = new MongoClient(url);
-// const db = client.db(dbName);
-
-//var express = require("express");
-// var cors = require("cors");
-// var app = express();
-// var fs = require("fs");
-// var bodyParser = require("body-parser");
-// app.use(cors());
-// app.use(bodyParser.json());
-// const port = "8081";
-// const host = "localhost";
-
-// app.get("/foods", async (req, res) => {
-//   await client.connect();
-//   console.log("Node connected successfully to GET MongoDB");
-//   const query = {};
-//   const results = await db
-//   .collection("FoodieForecast")
-//   .find(query)
-//   .limit(100)
-//   .toArray();
-//   console.log(results);
-//   res.status(200);
-//   res.send(results);
-//   });
-
-//   app.listen(port, () => {
-//       console.log("App listening at http://%s:%s", host, port);
-//       });
 
 const Button = ({ onClick, label }) => {
   return (
@@ -164,7 +125,7 @@ function POST() {
   const [url, setUrl] = useState("");
   const [desc, setDesc] = useState("");
   const [recipe, setRecipe] = useState("");
-  const [temperature, setTemperature] = useState("0-10");
+  const [temperature, setTemperature] = useState(tempForFilter);
 
   let FoodCheck = false;
   let DrinkCheck = false;
@@ -174,23 +135,45 @@ function POST() {
   const postNewFood = (e) => {
     e.preventDefault();
 
+    let FoodChecked = FoodCheck.toString();
+    let DrinkChecked = DrinkCheck.toString();
+    let VegetarianChecked = VegetarianCheck.toString();
+    let LactoseChecked = LactoseCheck.toString();
+
     console.log("Food name: " + foodName);
     console.log("URL: " + url);
     console.log("Description: " + desc);
     console.log("Recipe: " + recipe);
     console.log("Temperature range: " + temperature);
-    console.log(FoodCheck, DrinkCheck, VegetarianCheck, LactoseCheck);
+    console.log(FoodChecked, DrinkChecked, VegetarianChecked, LactoseChecked);
 
     const formData = {
       id: temperature,
-      food: FoodCheck,
-      drink: DrinkCheck,
-      vegetarian: VegetarianCheck,
-      dairy: LactoseCheck,
+      food: FoodChecked,
+      drink: DrinkChecked,
+      vegetarian: VegetarianChecked,
+      dairy: LactoseChecked,
       name: foodName,
       url: url,
       desc: desc,
+      recipe: recipe
     };
+
+
+      fetch('http://localhost:8081/addFood', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(
+        formData
+      )
+      })
+      .then(response => response.json())
+      .then(data => {
+      console.log(data);
+      });
+      
+
+      loadFirstPage();
   };
 
   return (
@@ -260,7 +243,7 @@ function POST() {
               Recipe:
               <input
                 className="coolTitle"
-                type="text"
+                type="url"
                 id="Recipe"
                 name="recipe"
                 value={recipe}
@@ -450,13 +433,15 @@ const calculateForecast = (a, b, c, d) => {
     console.log(a, b, c, d);
     //THIS SETS FILTERED DATA TO THE OBJECT(IF ANY) THAT FITS THE SELECTIONS
     //fetch("http://localhost:8081/foods")
-    fetch("data.json")
+    fetch("http://localhost:8081/foods")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        jsondata = data.images;
+        jsondata = data;
 
         const temperatureFilteredArray = [];
+
+        console.log(jsondata);
 
         jsondata.forEach((element) => {
           if (element.id == tempForFilter) {
@@ -768,6 +753,10 @@ const Weather = () => {
             </section>
           </section>
           <div className="center">
+            <div className="coolTitle2">
+              <h3 className="coolTitle2">Food selection options:</h3>
+            </div>
+
             <div className="center">
               <label className="coolTitle">
                 <input
