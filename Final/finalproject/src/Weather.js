@@ -320,7 +320,7 @@ function POST() {
                   (LactoseCheck = HandleChange(LactoseCheck, true))
                 }
               />
-              Is Lactose-Free?
+              Is Dairy?
             </label>
           </div>
           <section>
