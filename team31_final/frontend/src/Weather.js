@@ -48,7 +48,7 @@ function StudentInfo(){
     </section>
 
     <div className="center">
-        <div><img src="./calhf.jpg" className="imagechanger"/>
+        <div><img src="https://etmayer6.github.io/secoms319/studentInfo/calhf.jpg" className="imagechanger"/>
         </div>
         <div>
         <h1 className="coolfont">
@@ -59,7 +59,7 @@ function StudentInfo(){
     </div>
     
     <div className="center">
-        <div><img src="./profile.jpg" className="imagechanger"/>
+        <div><img src="https://etmayer6.github.io/secoms319/studentInfo/profile.jpg" className="imagechanger"/>
         </div>
       
           <h1 className="coolfont">Ethan Mayer</h1>
@@ -181,7 +181,7 @@ function POST() {
       className="Weather"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url(${require("./sun-images.jpg")})`,
+        backgroundImage: `url(${require("https://etmayer6.github.io/secoms319/page1/sun-images.jpg")})`,
       }}
     >
       <div>
@@ -197,14 +197,13 @@ function POST() {
           </div>
         </section>
         <section>
-          <div>
+          <div className="center">
             <h3 className="coolTitle3">
               We were unable to calculate a food item that matches your search
               queries. Please try adding your own!
             </h3>
           </div>
         </section>
-        <form onSubmit={postNewFood}>
           <div className="center">
             <label className="coolTitle3">
               Name of food:
@@ -325,17 +324,12 @@ function POST() {
           </div>
           <section>
             <div className="center">
-              <input
-                className="coolTitle3"
-                type="submit"
-                value="Submit"
-              ></input>
+              <Button className="coolTitle3" onClick={postNewFood} label="Submit"></Button>
             </div>
             <div className="center">
               <Button className="coolTitle3" onClick={loadFirstPage} label="Back"></Button>
             </div>
           </section>
-        </form>
       </div>
     </body>
   );
@@ -374,7 +368,7 @@ function Forecast() {
       className="Weather"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url(${require("./sun-images.jpg")})`,
+        backgroundImage: `url(${require("https://etmayer6.github.io/secoms319/page1/sun-images.jpg")})`,
       }}
     >
       <div>
@@ -594,7 +588,7 @@ const getTemp = () => {
       }
 
       //then run the loadImages function after getting temp, since we need temp first
-      fetch("view.json")
+      fetch("http://localhost:8081/images")
         .then((response) => response.json())
         .then((weather) => loadTemperature(weather));
     }
@@ -611,6 +605,7 @@ const loadTemperature = (weather) => {
   let index;
 
   console.log(temp);
+  console.log(weather);
 
   if (temp < 0) {
     index = 0;
@@ -651,7 +646,7 @@ const loadTemperature = (weather) => {
     index = 12;
   }
 
-  let image = weather.weather[index].image;
+  let image = weather[0].weather[index].image;
 
   let outside = document.createElement("p");
   outside.innerHTML = `<p class="coolfont"> Current temperature in Ames: <strong>${temp}</strong> <br><br> 

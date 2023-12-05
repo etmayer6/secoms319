@@ -31,6 +31,20 @@ app.get("/foods", async (req, res) => {
   });
 
 
+  app.get("/images", async (req, res) => {
+    await client.connect();
+    console.log("Node connected successfully to GET MongoDB View");
+    const query = {};
+    const results = await db
+    .collection("View")
+    .find(query)
+    .limit(100)
+    .toArray();
+    console.log(results);
+    res.status(200);
+    res.send(results);
+    });
+
 
   app.post("/addFood", async (req, res) => {
     await client.connect();
