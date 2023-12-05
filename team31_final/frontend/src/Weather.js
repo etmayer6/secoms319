@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./style.css";
-import Container from 'react-bootstrap/Container';
+
 //bootstrap
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha256-2TnSHycBDAm2wpZmgdi0z81kykGPJAkiUY+Wf97RbvY=" crossorigin="anonymous"></link>
 
@@ -12,6 +12,107 @@ const Button = ({ onClick, label }) => {
     </button>
   );
 };
+
+function getAllFoods(){
+
+
+  fetch("http://localhost:8081/foods")
+      .then((response) => response.json())
+      .then((data) => {
+        finalFilteredArray = data;
+
+
+        setTimeout(() => {
+          if (finalFilteredArray.length !== 0) {
+            const renderForecast = () => {
+              const root = ReactDOM.createRoot(document.getElementById("root"));
+              root.render(
+                <div>
+                  <div>
+                    <AllFoods />
+                  </div>
+                </div>
+              );
+            };
+      
+            renderForecast();
+      
+            // console.log("rendered");
+      
+            setTimeout(() => {
+              
+              finalFilteredArray.forEach((element) => {
+                loadImages();
+                setTemp++;
+              });
+              
+            }, 200);
+          } 
+        });
+      });
+
+      setTemp = 0;
+}
+
+function AllFoods(){
+
+  const back =() =>{
+    loadFirstPage();
+  }
+      return (
+        <body
+          className="Weather"
+          style={{
+            backgroundSize: "cover",
+            backgroundImage: `url("https://etmayer6.github.io/secoms319/page1/sun-images.jpg")`,
+          }}
+        >
+          <div>
+            <div>
+              <section>
+                <div className="center">
+                  <h1
+                    id="forecast"
+                    style={{ textAlign: "center" }}
+                    className="coolTitle"
+                  >
+                    Foodie Forecast!
+                  </h1>
+                </div>
+              </section>
+              <section>
+                <div className="hide">
+                  <h3 id="temperature" className="coolTitle" />
+                </div>
+              </section>
+    
+              <section>
+                <div className="center">
+                  <h3 id="text" className="coolTitle">
+                    Name:{" "}
+                  </h3>
+                </div>
+              </section>
+              <section>
+                <div className="center">
+                  <div id="img"></div>
+                </div>
+              </section>
+              <section>
+                <div className="center">
+                  <h3 id="text2" className="coolTitle"></h3>
+                </div>
+              </section>
+              <section>
+                <div className="center">
+                  <Button onClick={back} label="Back" />
+                </div>
+              </section>
+            </div>
+          </div>
+        </body>
+      );
+}
 
 function ShowStudentInfo(){
   const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -181,7 +282,7 @@ function POST() {
       className="Weather"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url(${require("https://etmayer6.github.io/secoms319/page1/sun-images.jpg")})`,
+        backgroundImage: `url("https://etmayer6.github.io/secoms319/page1/sun-images.jpg")`,
       }}
     >
       <div>
@@ -192,7 +293,7 @@ function POST() {
               style={{ textAlign: "center" }}
               className="coolTitle"
             >
-              Foodie Forecast!
+              Foodie Forecast - Add New Food!
             </h1>
           </div>
         </section>
@@ -335,7 +436,305 @@ function POST() {
   );
 }
 
+
+function UPDATE() {
+  const [foodName, setName] = useState(finalFilteredArray[0].name);
+  const [url, setUrl] = useState(finalFilteredArray[0].url);
+  const [desc, setDesc] = useState(finalFilteredArray[0].desc);
+  const [recipe, setRecipe] = useState(finalFilteredArray[0].recipe);
+  const [temperature, setTemperature] = useState(tempForFilter);
+
+
+  let FoodCheck = false;
+  let DrinkCheck = false;
+  let VegetarianCheck = false;
+  let LactoseCheck = false;
+
+  // if(finalFilteredArray[0].food === 'true'){
+  //   console.log("true");
+  //   FoodCheck = true;
+  //   console.log(FoodCheck);
+  // }
+  // else{
+  //   console.log("false");
+  //   FoodCheck = false;
+  // }
+  // if(finalFilteredArray[0].drink === 'true'){
+  //   DrinkCheck = true;
+  // }
+  // else{
+  //   DrinkCheck = false;
+  // }
+  // if(finalFilteredArray[0].vegetarian === 'true'){
+  //   VegetarianCheck = true;
+  // }
+  // else{
+  //   VegetarianCheck = false;
+  // }
+  // if(finalFilteredArray[0].dairy === 'true'){
+  //   LactoseCheck = true;
+  // }
+  // else{
+  //   LactoseCheck = false;
+  // }
+  
+
+  const postNewFood = (e) => {
+    e.preventDefault();
+
+    let FoodChecked = FoodCheck.toString();
+    let DrinkChecked = DrinkCheck.toString();
+    let VegetarianChecked = VegetarianCheck.toString();
+    let LactoseChecked = LactoseCheck.toString();
+
+    console.log("Food name: " + foodName);
+    console.log("URL: " + url);
+    console.log("Description: " + desc);
+    console.log("Recipe: " + recipe);
+    console.log("Temperature range: " + temperature);
+    console.log(FoodChecked, DrinkChecked, VegetarianChecked, LactoseChecked);
+
+    const formData = {
+      id: temperature,
+      food: FoodChecked,
+      drink: DrinkChecked,
+      vegetarian: VegetarianChecked,
+      dairy: LactoseChecked,
+      name: foodName,
+      url: url,
+      desc: desc,
+      recipe: recipe
+    };
+
+
+      fetch('http://localhost:8081/addFood', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(
+        formData
+      )
+      })
+      .then(response => response.json())
+      .then(data => {
+      console.log(data);
+      });
+
+
+      let id = finalFilteredArray[0]._id;
+      console.log("Updating", id);
+      fetch('http://localhost:8081/deleteFood', {
+      method: "DELETE",
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(
+      {
+      "id": id
+      }
+      )
+      })
+      .then(response => response.json())
+      .then(data => {
+      console.log(data)
+      })
+      .catch((err) => console.log("Error:" + err))
+
+      loadFirstPage();
+
+  };
+
+  return (
+    <body
+      className="Weather"
+      style={{
+        backgroundSize: "cover",
+        backgroundImage: `url("https://etmayer6.github.io/secoms319/page1/sun-images.jpg")`,
+      }}
+    >
+      <div>
+        <section>
+          <div className="center">
+            <h1
+              id="forecast"
+              style={{ textAlign: "center" }}
+              className="coolTitle"
+            >
+              Foodie Forecast - Update Food Item!
+            </h1>
+          </div>
+        </section>
+        <section>
+          <div className="center">
+            <h3 className="coolTitle3">
+              Change the data already filled to update food item!
+            </h3>
+          </div>
+        </section>
+          <div className="center">
+            <label className="coolTitle3">
+              Name of food:
+              <input
+                className="coolTitle"
+                type="text"
+                id="Name"
+                name="name"
+                value={foodName}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </label>
+            <label className="coolTitle3">
+              Image URL:
+              <input
+                className="coolTitle"
+                type="url"
+                id="Url"
+                name="url"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+              />
+            </label>
+            <label className="coolTitle3">
+              Description:
+              <input
+                className="coolTitle"
+                type="text"
+                id="Desc"
+                name="desc"
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+              />
+            </label>
+            <label className="coolTitle3">
+              Recipe:
+              <input
+                className="coolTitle"
+                type="url"
+                id="Recipe"
+                name="recipe"
+                value={recipe}
+                onChange={(e) => setRecipe(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="center">
+            <label className="coolTitle3">
+              Temperature:
+              <select
+                className="coolTitle"
+                value={temperature}
+                onChange={(e) => setTemperature(e.target.value)}
+              >
+                <option>0-10</option>
+                <option>10-20</option>
+                <option>20-30</option>
+                <option>30-40</option>
+                <option>40-50</option>
+                <option>50-60</option>
+                <option>60-70</option>
+                <option>70-80</option>
+                <option>80-90</option>
+                <option>90-100</option>
+                <option>100-110</option>
+              </select>
+            </label>
+          </div>
+          <div className="center">
+            <label className="coolTitle">
+              <input
+                className="coolTitle"
+                id="Food"
+                name="food"
+                type="checkbox"
+                value={FoodCheck}
+                onChange={(e) => (FoodCheck = HandleChange(FoodCheck, true))}
+              />
+              Is Food?
+            </label>
+            <label className="coolTitle">
+              <input
+                className="coolTitle"
+                id="Drinks"
+                name="drinks"
+                type="checkbox"
+                value={DrinkCheck}
+                onChange={(e) => (DrinkCheck = HandleChange(DrinkCheck, true))}
+              />
+              Is Drink?
+            </label>
+            <label className="coolTitle">
+              <input
+                className="coolTitle"
+                id="Vegetarian"
+                name="vegetarian"
+                type="checkbox"
+                value={VegetarianCheck}
+                onChange={(e) =>
+                  (VegetarianCheck = HandleChange(VegetarianCheck, true))
+                }
+              />
+              Is Vegetarian?
+            </label>
+            <label className="coolTitle">
+              <input
+                className="coolTitle"
+                id="Lactose-Free"
+                name="lactose-free"
+                type="checkbox"
+                value={LactoseCheck}
+                onChange={(e) =>
+                  (LactoseCheck = HandleChange(LactoseCheck, true))
+                }
+              />
+              Is Dairy?
+            </label>
+          </div>
+          <section>
+            <div className="center">
+              <Button className="coolTitle3" onClick={postNewFood} label="Update"></Button>
+            </div>
+            <div className="center">
+              <Button className="coolTitle3" onClick={loadFirstPage} label="Back"></Button>
+            </div>
+          </section>
+      </div>
+    </body>
+  );
+}
+
+
 function Forecast() {
+
+  const deleteFood = () => {
+
+      let id = finalFilteredArray[0]._id;
+      console.log("Deleting", id);
+      fetch('http://localhost:8081/deleteFood', {
+      method: "DELETE",
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(
+      {
+      "id": id
+      }
+      )
+      })
+      .then(response => response.json())
+      .then(data => {
+      console.log(data)
+      })
+      .catch((err) => console.log("Error:" + err))
+
+      loadFirstPage();
+  }
+
+  const updateFood = () => {
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(
+        <div>
+          <div>
+            <UPDATE />
+          </div>
+        </div>
+      );
+  }
+
   const loadRecipe = () => {
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(
@@ -368,7 +767,7 @@ function Forecast() {
       className="Weather"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url(${require("https://etmayer6.github.io/secoms319/page1/sun-images.jpg")})`,
+        backgroundImage: `url("https://etmayer6.github.io/secoms319/page1/sun-images.jpg")`,
       }}
     >
       <div>
@@ -412,6 +811,12 @@ function Forecast() {
               <Button onClick={loadRecipe} label="See Recipe" />
             </div>
             <div className="center">
+              <Button onClick={updateFood} label="Update This Food" />
+            </div>
+            <div className="center">
+              <Button onClick={deleteFood} label="Delete This Food" />
+            </div>
+            <div className="center">
               <Button onClick={loadFirstPage} label="Back" />
             </div>
           </section>
@@ -438,7 +843,7 @@ const calculateForecast = (a, b, c, d) => {
         console.log(jsondata);
 
         jsondata.forEach((element) => {
-          if (element.id == tempForFilter) {
+          if (element.id === tempForFilter) {
             temperatureFilteredArray.push(element);
           }
         });
@@ -450,14 +855,14 @@ const calculateForecast = (a, b, c, d) => {
         //if food is checked
         if (a) {
           temperatureFilteredArray.forEach((element) => {
-            if (element.food == "true") {
+            if (element.food === "true") {
               console.log("Food = true");
               foodFilteredArray.push(element);
             }
           });
         } else {
           temperatureFilteredArray.forEach((element) => {
-            if (element.food == "false") {
+            if (element.food === "false") {
               console.log("Food = false");
               foodFilteredArray.push(element);
             }
@@ -470,14 +875,14 @@ const calculateForecast = (a, b, c, d) => {
         //if drink is checked
         if (b) {
           foodFilteredArray.forEach((element) => {
-            if (element.drink == "true") {
+            if (element.drink === "true") {
               console.log("Drink = true");
               drinkFilteredArray.push(element);
             }
           });
         } else {
           foodFilteredArray.forEach((element) => {
-            if (element.drink == "false") {
+            if (element.drink === "false") {
               console.log("Drink = false");
               drinkFilteredArray.push(element);
             }
@@ -490,14 +895,14 @@ const calculateForecast = (a, b, c, d) => {
         //if vegetarian is checked
         if (c) {
           drinkFilteredArray.forEach((element) => {
-            if (element.vegetarian == "true") {
+            if (element.vegetarian === "true") {
               console.log("Veg = true");
               vegetarianFilteredArray.push(element);
             }
           });
         } else {
           drinkFilteredArray.forEach((element) => {
-            if (element.vegetarian == "false") {
+            if (element.vegetarian === "false") {
               console.log("Veg = false");
               vegetarianFilteredArray.push(element);
             }
@@ -510,7 +915,7 @@ const calculateForecast = (a, b, c, d) => {
         if (d) {
           vegetarianFilteredArray.forEach(element => {
 
-            if (element.dairy == "true") {
+            if (element.dairy === "true") {
               finalFilteredArray.push(element);
             }
           });
@@ -518,7 +923,7 @@ const calculateForecast = (a, b, c, d) => {
         else {
           vegetarianFilteredArray.forEach(element => {
 
-            if (element.dairy == "false") {
+            if (element.dairy === "false") {
               finalFilteredArray.push(element);
             }
           });
@@ -533,7 +938,7 @@ const calculateForecast = (a, b, c, d) => {
   filterJSON(a, b, c, d);
 
   setTimeout(() => {
-    if (finalFilteredArray.length != 0) {
+    if (finalFilteredArray.length !== 0) {
       const renderForecast = () => {
         const root = ReactDOM.createRoot(document.getElementById("root"));
         root.render(
@@ -678,7 +1083,6 @@ const loadImages = () => {
   console.log(curTemp);
   console.log(curText2);
 
-  console.log(images[0].url);
   let url = images[setTemp].url;
   let name = images[setTemp].name;
   let desc = images[setTemp].desc;
@@ -712,10 +1116,10 @@ let HandleChange = (a, b) => {
   }
 };
 const Weather = () => {
-  let [FoodCheck, setFoodCheck] = useState(false);
-  let [DrinkCheck, setDrinkCheck] = useState(false);
-  let [VegetarianCheck, setVegetarianCheck] = useState(false);
-  let [DairyCheck, setDairyCheck] = useState(false);
+  let [FoodCheck] = useState(false);
+  let [DrinkCheck] = useState(false);
+  let [VegetarianCheck] = useState(false);
+  let [DairyCheck] = useState(false);
   return (
     <body
       className="Weather"
@@ -826,6 +1230,12 @@ const Weather = () => {
                 ShowStudentInfo()
               }
               label="Show Student Info"
+            />
+          </div>
+          <div className="center">
+          <Button
+              onClick={getAllFoods}
+              label="Show All Foods"
             />
           </div>
         </div>

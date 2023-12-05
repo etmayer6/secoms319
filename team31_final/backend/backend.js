@@ -1,5 +1,5 @@
 
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 
 const url = "mongodb://127.0.0.1:27017";
 const dbName = "FoodieForecast";
@@ -77,6 +77,36 @@ app.get("/foods", async (req, res) => {
     res.status(200);
     res.send(results);
     });
+
+
+
+    app.delete("/deleteFood", async (req, res) => {
+      await client.connect();
+      // const keys = Object.keys(req.body);
+      const values = Object.values(req.body);
+      const id = values[0]; // id
+      console.log("Food to delete :",id);
+      const query = { "_id": new ObjectId(id) };
+      const results = await db.collection("FoodieForecast").deleteOne(query);
+      res.status(200);
+      res.send(results);
+      });
+
+      // app.put("/api/update", (req, res) => {
+      //   const values = Object.values(req.body);
+      //   const id = values[0]; 
+      //   const food = values[1]; 
+      //   const drink = values[2]; 
+      //   const vegetarian = values[3];
+      //   const dairy = values[4];
+      //   const name = values[5];
+      //   const url = values[6];
+      //   const desc= values[7];
+      //   const recipe = values[8];
+    
+      //   console.log(keys, values, id, food, drink, vegetarian, dairy, name, url, desc, recipe);
+
+      //   });
 
   app.listen(port, () => {
       console.log("App listening at http://%s:%s", host, port);
