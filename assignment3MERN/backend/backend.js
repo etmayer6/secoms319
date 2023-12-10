@@ -34,34 +34,21 @@ app.get("/catalog", async (req, res) => {
     });
   
   
-    app.get("/images", async (req, res) => {
-      await client.connect();
-      console.log("Node connected successfully to GET MongoDB");
-      const query = {};
-      const results = await db
-      .collection("images")
-      .find(query)
-      .limit(100)
-      .toArray();
-      console.log(results);
-      res.status(200);
-      res.send(results);
-      });
-  
-  
     app.post("/addProduct", async (req, res) => {
       await client.connect();
 
       const keys = Object.keys(req.body);
       const values = Object.values(req.body);
-      const id = values[0]; 
+      let id = values[0]; 
       const title = values[1]; 
-      const price = values[2]; 
+      let price = values[2]; 
       const description = values[3];
       const category = values[4];
       const image = values[5];
       const rating = values[6];
 
+      id = parseFloat(id);
+      price = parseFloat(price);
   
       console.log(id, title, price, description, category, image, rating);
   
@@ -87,7 +74,7 @@ app.get("/catalog", async (req, res) => {
         const values = Object.values(req.body);
         const id = values[0]; // id
         console.log("Product to delete:",id);
-        const query = { "_id": new ObjectId(id) };
+        const query = { "id": id };
         const results = await db.collection("fakestore_catalog").deleteOne(query);
         res.status(200);
         res.send(results);
